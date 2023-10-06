@@ -10,7 +10,6 @@ public class RuralfacilApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RuralfacilApplication.class, args);
-		teste
 	}
 
 }
