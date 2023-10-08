@@ -3,11 +3,7 @@ package com.tcs_senac.ruralfacil.model;
 import javax.persistence.*;
 
 @Entity
-public class Produto extends Categoria{
-
-    public Produto(long id) {
-        super(id);
-    }
+public class CategoriaProdutoAgricultor {
 
     @Id
     @GeneratedValue(
@@ -15,16 +11,11 @@ public class Produto extends Categoria{
     )
     private long id;
 
-
-    @Column(
-            name = "descricao"
+    @ManyToOne
+    @JoinColumn(
+            name = "idProduto"
     )
-    private String descricao;
-
-    @Column(
-            name = "organico"
-    )
-    private char organico;
+    private Produto produto;
 
     @ManyToOne
     @JoinColumn(
@@ -32,6 +23,9 @@ public class Produto extends Categoria{
     )
     private Categoria categoria;
 
-
-
+    @ManyToOne
+    @JoinColumn(
+            name = "idAgricultor"
+    )
+    private Agricultor agricultor;
 }
