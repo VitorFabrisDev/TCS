@@ -21,10 +21,6 @@ public class Produto extends Categoria{
     )
     private String descricao;
 
-    @Column(
-            name = "organico"
-    )
-    private char organico;
 
     @ManyToOne
     @JoinColumn(
