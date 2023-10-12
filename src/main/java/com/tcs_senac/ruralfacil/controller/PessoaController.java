@@ -1,5 +1,6 @@
 package com.tcs_senac.ruralfacil.controller;
 
+import com.tcs_senac.ruralfacil.exception.PessoaNotFoundException;
 import com.tcs_senac.ruralfacil.model.Pessoa;
 import com.tcs_senac.ruralfacil.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +17,24 @@ public class PessoaController {
 
     @PostMapping
     public Pessoa cadastrarPessoa(@RequestBody Pessoa pessoa) {
+
         return pessoaService.cadastrarPessoa(pessoa);
     }
 
     @GetMapping
     public List<Pessoa> listarPessoas() {
+
         return pessoaService.listarPessoas();
     }
 
     @GetMapping("/{id}")
-    public Pessoa obterPessoaPorId(@PathVariable Long id) {
+    public Pessoa obterPessoaPorId(@PathVariable Long id) throws PessoaNotFoundException {
+
         return pessoaService.obterPessoaPorId(id);
     }
 
     @PutMapping("/{id}")
-    public Pessoa atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+    public Pessoa atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) throws PessoaNotFoundException {
         return pessoaService.atualizarPessoa(id, pessoa);
     }
 

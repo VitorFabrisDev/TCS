@@ -17,6 +17,10 @@ public class Pessoa {
     private String cpf;
 
     @Column(
+            name = "nome"
+    )
+    private String nome;
+    @Column(
             name = "dataNascimento"
     )
     private Date dataNascimento;
@@ -42,6 +46,15 @@ public class Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String cpf) {
+        this.nome = nome;
+    }
+
 
     public Date getDataNascimento() {
         return dataNascimento;
