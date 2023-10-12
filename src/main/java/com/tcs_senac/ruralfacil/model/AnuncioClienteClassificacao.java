@@ -39,7 +39,7 @@ public class AnuncioClienteClassificacao {
     @Column(
             name = "qtdInteracao"
     )
-    private long qtdInteracao;
+ private long qtdInteracao;
 
 
 }
