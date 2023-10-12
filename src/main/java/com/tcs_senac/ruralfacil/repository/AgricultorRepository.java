@@ -4,13 +4,15 @@ import com.tcs_senac.ruralfacil.model.Agricultor;
 
 import java.util.Optional;
 
-public class AgricultorRepository {
+public interface AgricultorRepository {
 
-    public Agricultor save(Agricultor agricultor) {
+    public default Agricultor save(Agricultor agricultor) {
+
         return agricultor;
     }
 
-    public Optional<Agricultor> findById(Long id) {
+    public default Optional<Agricultor> findById(Long id) {
+
         return null;
     }
 }

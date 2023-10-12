@@ -5,18 +5,18 @@ import com.tcs_senac.ruralfacil.model.Pessoa;
 import java.util.List;
 import java.util.Optional;
 
-public class PessoaRepository {
+public interface PessoaRepository {
 
-    public Pessoa save(Pessoa pessoa) {
+    public default Pessoa save(Pessoa pessoa) {
         return pessoa;
     }
 
-    public List<Pessoa> findAll() {
+    public default List<Pessoa> findAll() {
         return null;
     }
 
 
-    public Optional<Pessoa> findById(Long id) {
+    public default Optional<Pessoa> findById(Long id) {
         return null;
     }
 }

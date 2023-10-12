@@ -1,4 +1,4 @@
 package com.tcs_senac.ruralfacil.repository;
 
-public class EnderecoRepository {
+public interface EnderecoRepository {
 }
