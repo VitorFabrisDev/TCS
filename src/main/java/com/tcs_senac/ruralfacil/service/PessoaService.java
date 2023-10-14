@@ -3,12 +3,22 @@ package com.tcs_senac.ruralfacil.service;
 import com.tcs_senac.ruralfacil.exception.PessoaNotFoundException;
 import com.tcs_senac.ruralfacil.repository.PessoaRepository;
 import com.tcs_senac.ruralfacil.model.Pessoa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PessoaService {
 
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
+
+    @Autowired
+    public PessoaService(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
+    }
+
     public Pessoa cadastrarPessoa(Pessoa pessoa) {
 
         return pessoaRepository.save(pessoa);

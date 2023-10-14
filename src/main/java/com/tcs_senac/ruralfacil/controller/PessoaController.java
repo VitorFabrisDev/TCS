@@ -4,10 +4,11 @@ import com.tcs_senac.ruralfacil.exception.PessoaNotFoundException;
 import com.tcs_senac.ruralfacil.model.Pessoa;
 import com.tcs_senac.ruralfacil.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/pessoa")
 public class PessoaController {
@@ -16,25 +17,28 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public Pessoa cadastrarPessoa(@RequestBody Pessoa pessoa) {
+    public Pessoa cadastrarPessoa(@Valid @RequestBody Pessoa pessoa) {
 
         return pessoaService.cadastrarPessoa(pessoa);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Pessoa> listarPessoas() {
 
         return pessoaService.listarPessoas();
     }
 
     @GetMapping("/{id}")
-    public Pessoa obterPessoaPorId(@PathVariable Long id) throws PessoaNotFoundException {
+    @PreAuthorize("hasRole('ADMIN')")
+    public Pessoa obterPessoaPorId(@PathVariable(value = "id") Long id) throws PessoaNotFoundException {
 
         return pessoaService.obterPessoaPorId(id);
     }
 
     @PutMapping("/{id}")
-    public Pessoa atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) throws PessoaNotFoundException {
+    @PreAuthorize("hasRole('ADMIN')")
+    public Pessoa atualizarPessoa(@PathVariable(value ="id") Long id, @RequestBody Pessoa pessoa) throws PessoaNotFoundException {
         return pessoaService.atualizarPessoa(id, pessoa);
     }
 

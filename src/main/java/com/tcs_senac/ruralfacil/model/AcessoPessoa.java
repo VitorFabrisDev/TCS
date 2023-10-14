@@ -1,6 +1,7 @@
 package com.tcs_senac.ruralfacil.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class AcessoPessoa extends Pessoa{
@@ -36,9 +37,9 @@ public class AcessoPessoa extends Pessoa{
     private long qtdAcesso;
 
     @Column(
-            name = "qtUltAcesso"
+            name = "dtUltAcesso"
     )
-    private long qtUltAcesso;
+    private Date dtUltAcesso;
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -72,11 +73,11 @@ public class AcessoPessoa extends Pessoa{
         this.qtdAcesso = qtdAcesso;
     }
 
-    public long getQtUltAcesso() {
-        return qtUltAcesso;
+    public Date getDtUltAcesso() {
+        return dtUltAcesso;
     }
 
-    public void setQtUltAcesso(long qtUltAcesso) {
-        this.qtUltAcesso = qtUltAcesso;
+    public void setDtUltAcesso(Date qtUltAcesso) {
+        this.dtUltAcesso = qtUltAcesso;
     }
 }

@@ -8,7 +8,6 @@ public class Agricultor extends Pessoa{
     public Agricultor(long id) {
         super(id);
     }
-
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO

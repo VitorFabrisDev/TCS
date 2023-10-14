@@ -6,9 +6,11 @@ import com.tcs_senac.ruralfacil.model.Pessoa;
 import com.tcs_senac.ruralfacil.repository.AgricultorRepository;
 import com.tcs_senac.ruralfacil.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class AgricultorService {
     private final AgricultorRepository agricultorRepository;
     private final PessoaRepository pessoaRepository;
@@ -38,14 +40,11 @@ public class AgricultorService {
 
     public Agricultor atualizarAgricultor(Long id, Agricultor agricultorAtualizado) throws AgricultorNotFoundException {
             Agricultor agricultorExistente = (Agricultor) obterAgricultorPessoa(id);
-            agricultorExistente.setCpf(agricultorAtualizado.getCpf());
-            agricultorExistente.setNome(agricultorAtualizado.getNome());
-            agricultorExistente.setDataNascimento(agricultorAtualizado.getDataNascimento());
-            agricultorExistente.setEmail(agricultorAtualizado.getEmail());
-            agricultorExistente.setWhatsApp(agricultorAtualizado.getWhatsApp());
-            agricultorExistente.setAtivo(agricultorAtualizado.getAtivo());
+            agricultorExistente.setPessoa(agricultorAtualizado.getPessoa());
+            agricultorExistente.setInscricaoEstadual(agricultorAtualizado.getInscricaoEstadual());
             agricultorExistente.setCaf(agricultorAtualizado.getCaf());
             agricultorExistente.setOrganico(agricultorAtualizado.getOrganico());
-            return agricultorRepository.save(agricultorAtualizado);
+            agricultorExistente.setAtivo(agricultorAtualizado.getAtivo());
+            return agricultorRepository.save(agricultorExistente);
     }
 }
