@@ -1,4 +1,53 @@
 package com.tcs_senac.ruralfacil.service;
 
+import com.tcs_senac.ruralfacil.exception.EnderecoNotFoundException;
+import com.tcs_senac.ruralfacil.model.Endereco;
+import com.tcs_senac.ruralfacil.repository.EnderecoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class EnderecoService {
+
+    private final EnderecoRepository enderecoRepository;
+
+    @Autowired
+    public EnderecoService(EnderecoRepository enderecoRepository) {
+        this.enderecoRepository = enderecoRepository;
+    }
+
+    public Endereco cadastrarEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+
+    }
+
+    public List<Endereco> listarEnderecos() {
+        return enderecoRepository.findAll();
+    }
+
+    public Endereco obterEnderecoPorId(Long id) throws EnderecoNotFoundException {
+        Optional<Endereco> endereco = enderecoRepository.findById(id);
+        if (endereco.isPresent()) {
+            return endereco.get();
+        } else {
+            throw new EnderecoNotFoundException("Endereço não encontrado");
+        }
+
+    }
+
+    public Endereco atualizarEndereco(Long id, Endereco enderecoAtualizado) throws EnderecoNotFoundException {
+        Endereco enderecoExistente = obterEnderecoPorId(id);
+        enderecoExistente.setLogradouro(enderecoAtualizado.getLogradouro());
+        enderecoExistente.setBairro(enderecoAtualizado.getBairro());
+        enderecoExistente.setNumero(enderecoAtualizado.getNumero());
+        enderecoExistente.setComplemento(enderecoAtualizado.getComplemento());
+        enderecoExistente.setCep(enderecoAtualizado.getCep());
+        enderecoExistente.setMunicipio(enderecoAtualizado.getMunicipio());
+        enderecoExistente.setTipoEndereco(enderecoAtualizado.getTipoEndereco());
+        enderecoExistente.setInscricaoIncra(enderecoAtualizado.getInscricaoIncra());
+        return enderecoRepository.save(enderecoExistente);
+    }
 }

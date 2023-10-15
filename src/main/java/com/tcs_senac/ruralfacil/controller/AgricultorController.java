@@ -7,6 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/agricultor")
 public class AgricultorController {
@@ -17,16 +19,21 @@ public class AgricultorController {
     public Agricultor cadastrarAgricultorPessoa(@Valid  @RequestBody Agricultor agricultor) {
         return agricultorService.cadastrarAgricultorPessoa(agricultor);
     }
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Agricultor> listarAgricultores() {
 
+        return agricultorService.listarAgricultores();
+    }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Agricultor obterAgricultorPessoa(@PathVariable Long id) throws AgricultorNotFoundException {
-        return (Agricultor) agricultorService.obterAgricultorPessoa(id);
+        return agricultorService.obterAgricultorPessoa(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody Agricultor agricultor) throws PessoaNotFoundException, AgricultorNotFoundException {
+    public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody Agricultor agricultor) throws AgricultorNotFoundException {
         return agricultorService.atualizarAgricultor(id, agricultor);
     }
 }

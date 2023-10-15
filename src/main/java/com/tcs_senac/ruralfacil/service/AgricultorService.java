@@ -8,6 +8,7 @@ import com.tcs_senac.ruralfacil.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,8 +29,11 @@ public class AgricultorService {
         return agricultorRepository.save(agricultor);
     }
 
+    public List<Agricultor> listarAgricultores() {
+        return agricultorRepository.findAll();
+    }
 
-    public Pessoa obterAgricultorPessoa(Long id) throws AgricultorNotFoundException {
+    public Agricultor obterAgricultorPessoa(Long id) throws AgricultorNotFoundException {
         Optional<Agricultor> agricultor = agricultorRepository.findById(id);
         if (agricultor.isPresent()) {
             return agricultor.get();
@@ -47,4 +51,6 @@ public class AgricultorService {
             agricultorExistente.setAtivo(agricultorAtualizado.getAtivo());
             return agricultorRepository.save(agricultorExistente);
     }
+
+
 }
