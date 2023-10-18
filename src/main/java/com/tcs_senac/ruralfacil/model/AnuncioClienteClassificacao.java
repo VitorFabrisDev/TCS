@@ -11,7 +11,7 @@ public class AnuncioClienteClassificacao {
 
     @ManyToOne
     @JoinColumn(
-            name = "idPessoa"
+            name = "idCliente"
     )
     private Cliente cliente;
 
