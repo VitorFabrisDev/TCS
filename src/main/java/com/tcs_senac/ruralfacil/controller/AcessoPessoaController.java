@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class AcessoPessoaController {
     private AcessoPessoaService acessoPessoaService;
 
     @PostMapping("/cadastrar")
-    public AcessoPessoa acessoPessoa(@Valid  @RequestBody AcessoPessoa acessoPessoa) {
+    public AcessoPessoa acessoPessoa(@Valid @RequestBody AcessoPessoa acessoPessoa) {
         return acessoPessoaService.cadastrarAcessoPessoa(acessoPessoa);
     }
 

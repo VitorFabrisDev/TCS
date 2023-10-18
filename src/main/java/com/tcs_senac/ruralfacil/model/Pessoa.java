@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Pessoa {
+public abstract class Pessoa {
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
