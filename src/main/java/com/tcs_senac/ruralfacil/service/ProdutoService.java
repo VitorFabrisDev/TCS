@@ -29,7 +29,7 @@ public class ProdutoService {
     public Produto obterProdutoPorId(Long id) throws ProdutoNotFoundException {
         Optional<Produto> produto = produtoRepository.findById(id);
         if(produto.isPresent()){
-            return produto.get()
+            return produto.get();
         } else {
             throw new ProdutoNotFoundException("Produto não encontrado");
         }
