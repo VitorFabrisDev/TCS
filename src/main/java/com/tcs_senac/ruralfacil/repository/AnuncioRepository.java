@@ -1,4 +1,9 @@
 package com.tcs_senac.ruralfacil.repository;
 
-public interface AnuncioRepository {
+import com.tcs_senac.ruralfacil.model.Anuncio;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 }

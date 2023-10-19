@@ -28,6 +28,21 @@ public class Produto extends Categoria{
     )
     private Categoria categoria;
 
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
 
+    @Override
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }
