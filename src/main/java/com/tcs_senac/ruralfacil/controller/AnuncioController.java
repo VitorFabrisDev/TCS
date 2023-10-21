@@ -1,7 +1,7 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
-import com.tcs_senac.ruralfacil.exception.AnuncioNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class AnuncioController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Anuncio obterAgricultorPessoa(@PathVariable Long id) throws AnuncioNotFoundException {
+    public Anuncio obterAgricultorPessoa(@PathVariable Long id) throws NotFoundException {
         return anuncioService.obterAnuncioPorId(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Anuncio atualizarAgricultor(@PathVariable Long id, @RequestBody Anuncio anuncio) throws AnuncioNotFoundException {
+    public Anuncio atualizarAgricultor(@PathVariable Long id, @RequestBody Anuncio anuncio) throws NotFoundException {
         return anuncioService.atualizarAnuncio(id, anuncio);
     }
 }

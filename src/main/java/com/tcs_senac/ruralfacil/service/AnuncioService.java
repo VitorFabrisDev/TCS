@@ -1,6 +1,6 @@
 package com.tcs_senac.ruralfacil.service;
 
-import com.tcs_senac.ruralfacil.exception.AnuncioNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +27,17 @@ public class AnuncioService {
         return anuncioRepository.findAll();
     }
 
-    public Anuncio obterAnuncioPorId(Long id) throws AnuncioNotFoundException {
+    public Anuncio obterAnuncioPorId(Long id) throws NotFoundException {
         Optional<Anuncio> anuncio = anuncioRepository.findById(id);
         if (anuncio.isPresent()) {
             return anuncio.get();
         } else {
-            throw new AnuncioNotFoundException("Anúncio não encontrado");
+            throw new NotFoundException("Anúncio não encontrado");
         }
     }
 
-    public Anuncio atualizarAnuncio(Long id, Anuncio anuncioAtualizado) throws AnuncioNotFoundException {
+    public Anuncio atualizarAnuncio(Long id, Anuncio anuncioAtualizado) throws NotFoundException {
         Anuncio anuncioExistente = obterAnuncioPorId(id);
-        anuncioExistente.setCategoriaProdutoAgricultor(anuncioAtualizado.getCategoriaProdutoAgricultor());
         anuncioExistente.setDescricao(anuncioAtualizado.getDescricao());
         anuncioExistente.setOrganico(anuncioAtualizado.getOrganico());
         anuncioExistente.setClassificacao(anuncioAtualizado.getClassificacao());

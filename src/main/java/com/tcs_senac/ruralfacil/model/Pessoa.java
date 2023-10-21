@@ -3,13 +3,8 @@ package com.tcs_senac.ruralfacil.model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@MappedSuperclass
 public abstract class Pessoa {
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
-    private long id;
 
     @Column(
             name = "cpf"
@@ -35,8 +30,12 @@ public abstract class Pessoa {
     )
     private String whatsApp;
 
-    public Pessoa(long id) {
-        this.id = id;
+    public Pessoa(String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.whatsApp = whatsApp;
     }
 
     public String getCpf() {

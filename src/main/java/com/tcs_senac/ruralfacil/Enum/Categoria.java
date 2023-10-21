@@ -1,6 +1,6 @@
 package com.tcs_senac.ruralfacil.Enum;
 
-public enum CategoriaEnum {
+public enum Categoria {
     MUDAS_SEMENTES("Mudas/Sementes"),
     HORTALICAS("Hortaliças"),
     GRAOS("Grãos"),
@@ -17,7 +17,7 @@ public enum CategoriaEnum {
 
     private final String descricao;
 
-    CategoriaEnum(String descricao) {
+    Categoria(String descricao) {
         this.descricao = descricao;
     }
 

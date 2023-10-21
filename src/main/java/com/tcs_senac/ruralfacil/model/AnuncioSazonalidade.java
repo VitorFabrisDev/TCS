@@ -1,20 +1,22 @@
 package com.tcs_senac.ruralfacil.model;
 
+import com.tcs_senac.ruralfacil.Enum.Sazonalidade;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ProdutoSazonalidade {
+public class AnuncioSazonalidade {
 
     @ManyToOne
     @JoinColumn(
-            name = "idProduto"
+            name = "idAnuncioo"
     )
-    private Produto produto;
-    @ManyToOne
-    @JoinColumn(
-            name = "idSazonalidade"
+    private Anuncio anuncio;
+    @Column(
+            name = "Sazonalidade"
     )
     private Sazonalidade sazonalidade;
 

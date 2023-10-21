@@ -4,11 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class AcessoPessoa extends Pessoa{
+public class AcessoPessoa{
 
-    public AcessoPessoa(long id) {
-        super(id);
-    }
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
@@ -17,9 +14,15 @@ public class AcessoPessoa extends Pessoa{
 
     @ManyToOne
     @JoinColumn(
-            name = "idPessoa"
+            name = "idCliente", nullable = true
     )
-    private Pessoa pessoa;
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "idAgricultor", nullable = true
+    )
+    private Agricultor agricultor;
 
     @Column(
             name = "login"
@@ -41,13 +44,12 @@ public class AcessoPessoa extends Pessoa{
     )
     private Date dtUltAcesso;
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
+    @Column(
+            name = "admin"
+    )
+    private boolean admin;
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+
 
     public String getLogin() {
         return login;

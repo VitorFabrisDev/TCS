@@ -1,13 +1,13 @@
 package com.tcs_senac.ruralfacil.model;
 
+import com.tcs_senac.ruralfacil.Enum.Categoria;
+
 import javax.persistence.*;
 
 @Entity
-public class Produto extends Categoria{
+public class Produto{
 
-    public Produto(long id) {
-        super(id);
-    }
+
 
     @Id
     @GeneratedValue(
@@ -22,18 +22,15 @@ public class Produto extends Categoria{
     private String descricao;
 
 
-    @ManyToOne
-    @JoinColumn(
+    @Column(
             name = "idCategoria"
     )
     private Categoria categoria;
 
-    @Override
     public String getDescricao() {
         return descricao;
     }
 
-    @Override
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }

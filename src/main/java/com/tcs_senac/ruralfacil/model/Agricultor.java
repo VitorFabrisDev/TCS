@@ -3,22 +3,15 @@ package com.tcs_senac.ruralfacil.model;
 import javax.persistence.*;
 
 @Entity
-public class Agricultor extends Pessoa{
+public class Agricultor {
 
-    public Agricultor(long id) {
-        super(id);
-    }
+
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
     )
     private long id;
 
-    @OneToOne
-    @JoinColumn(
-            name = "idPessoa"
-    )
-    private Pessoa pessoa;
 
     @Column(
             name = "inscricaoEstadual"
@@ -48,13 +41,6 @@ public class Agricultor extends Pessoa{
         this.id = id;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
 
     public String getInscricaoEstadual() {
         return inscricaoEstadual;

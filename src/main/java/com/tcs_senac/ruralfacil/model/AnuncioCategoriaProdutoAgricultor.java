@@ -1,15 +1,17 @@
 package com.tcs_senac.ruralfacil.model;
 
+import com.tcs_senac.ruralfacil.Enum.Categoria;
+
 import javax.persistence.*;
 
 @Entity
-public class CategoriaProdutoAgricultor {
+public class AnuncioCategoriaProdutoAgricultor {
 
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
+    @ManyToOne
+    @JoinColumn(
+            name = "idAnuncio"
     )
-    private long id;
+    private Anuncio anuncio;
 
     @ManyToOne
     @JoinColumn(
@@ -17,9 +19,9 @@ public class CategoriaProdutoAgricultor {
     )
     private Produto produto;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "idCategoria"
+
+    @Column(
+            name= "categoria"
     )
     private Categoria categoria;
 

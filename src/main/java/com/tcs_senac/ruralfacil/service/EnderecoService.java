@@ -1,6 +1,6 @@
 package com.tcs_senac.ruralfacil.service;
 
-import com.tcs_senac.ruralfacil.exception.EnderecoNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Endereco;
 import com.tcs_senac.ruralfacil.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +28,17 @@ public class EnderecoService {
         return enderecoRepository.findAll();
     }
 
-    public Endereco obterEnderecoPorId(Long id) throws EnderecoNotFoundException {
+    public Endereco obterEnderecoPorId(Long id) throws NotFoundException {
         Optional<Endereco> endereco = enderecoRepository.findById(id);
         if (endereco.isPresent()) {
             return endereco.get();
         } else {
-            throw new EnderecoNotFoundException("Endereço não encontrado");
+            throw new NotFoundException("Endereço não encontrado");
         }
 
     }
 
-    public Endereco atualizarEndereco(Long id, Endereco enderecoAtualizado) throws EnderecoNotFoundException {
+    public Endereco atualizarEndereco(Long id, Endereco enderecoAtualizado) throws NotFoundException {
         Endereco enderecoExistente = obterEnderecoPorId(id);
         enderecoExistente.setLogradouro(enderecoAtualizado.getLogradouro());
         enderecoExistente.setBairro(enderecoAtualizado.getBairro());

@@ -1,9 +1,8 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
-import com.tcs_senac.ruralfacil.exception.EnderecoNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Endereco;
-import com.tcs_senac.ruralfacil.model.Pessoa;
 import com.tcs_senac.ruralfacil.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,14 +31,14 @@ public class EnderecoController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Endereco obterEnderecoPorId(@PathVariable(value = "id") Long id) throws EnderecoNotFoundException {
+    public Endereco obterEnderecoPorId(@PathVariable(value = "id") Long id) throws NotFoundException {
 
         return enderecoService.obterEnderecoPorId(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Endereco atualizarEndereco(@PathVariable(value ="id") Long id, @RequestBody Endereco endereco) throws EnderecoNotFoundException {
+    public Endereco atualizarEndereco(@PathVariable(value ="id") Long id, @RequestBody Endereco endereco) throws NotFoundException {
         return enderecoService.atualizarEndereco(id, endereco);
     }
 }

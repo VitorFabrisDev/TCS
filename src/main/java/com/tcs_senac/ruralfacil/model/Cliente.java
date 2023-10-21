@@ -5,11 +5,9 @@ import javax.persistence.*;
 
 
 @Entity
-public class Cliente extends  Pessoa{
+public class Cliente{
 
-    public Cliente(long id) {
-        super(id);
-    }
+
 
     @Id
     @GeneratedValue(
@@ -17,12 +15,12 @@ public class Cliente extends  Pessoa{
     )
     private long id;
 
-    @OneToOne
-    @JoinColumn(
-            name = "idPessoa"
-    )
-    private Pessoa pessoa;
+    public long getId() {
+        return id;
+    }
 
-
+    public void setId(long id) {
+        this.id = id;
+    }
 }
 

@@ -1,9 +1,9 @@
 package com.tcs_senac.ruralfacil.service;
 
-import com.tcs_senac.ruralfacil.exception.PessoaNotFoundException;
-import com.tcs_senac.ruralfacil.exception.ProdutoNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Produto;
 import com.tcs_senac.ruralfacil.repository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +14,7 @@ public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
 
+    @Autowired
     public ProdutoService(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
@@ -26,16 +27,16 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto obterProdutoPorId(Long id) throws ProdutoNotFoundException {
+    public Produto obterProdutoPorId(Long id) throws NotFoundException {
         Optional<Produto> produto = produtoRepository.findById(id);
         if(produto.isPresent()){
             return produto.get();
         } else {
-            throw new ProdutoNotFoundException("Produto não encontrado");
+            throw new NotFoundException("Produto não encontrado");
         }
     }
 
-    public Produto atualizarProduto(Long id, Produto produtoAtualizado) throws ProdutoNotFoundException {
+    public Produto atualizarProduto(Long id, Produto produtoAtualizado) throws NotFoundException {
         Produto produtoExistente = obterProdutoPorId(id);
         produtoExistente.setDescricao(produtoAtualizado.getDescricao());
         produtoExistente.setCategoria(produtoAtualizado.getCategoria());

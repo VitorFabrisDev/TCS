@@ -1,7 +1,7 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
-import com.tcs_senac.ruralfacil.exception.AcessoPessoaNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class AcessoPessoaController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public AcessoPessoa obterAcessoPessoaPorId(@PathVariable(value = "id") Long id) throws AcessoPessoaNotFoundException {
+    public AcessoPessoa obterAcessoPessoaPorId(@PathVariable(value = "id") Long id) throws NotFoundException {
         return acessoPessoaService.obterAcessoPessoaPorId(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public AcessoPessoa atualizarAcessoPessoa(@PathVariable(value = "id") Long id, @RequestBody AcessoPessoa acessoPessoa) throws AcessoPessoaNotFoundException {
+    public AcessoPessoa atualizarAcessoPessoa(@PathVariable(value = "id") Long id, @RequestBody AcessoPessoa acessoPessoa) throws NotFoundException {
         return acessoPessoaService.atualizarAcessoPessoa(id, acessoPessoa);
     }
 }

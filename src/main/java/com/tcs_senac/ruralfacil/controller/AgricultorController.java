@@ -1,5 +1,5 @@
 package com.tcs_senac.ruralfacil.controller;
-import com.tcs_senac.ruralfacil.exception.AgricultorNotFoundException;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.service.AgricultorService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,13 +26,13 @@ public class AgricultorController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Agricultor obterAgricultorPessoa(@PathVariable Long id) throws AgricultorNotFoundException {
+    public Agricultor obterAgricultorPessoa(@PathVariable Long id) throws NotFoundException {
         return agricultorService.obterAgricultorPessoa(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody Agricultor agricultor) throws AgricultorNotFoundException {
+    public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody Agricultor agricultor) throws NotFoundException {
         return agricultorService.atualizarAgricultor(id, agricultor);
     }
 }

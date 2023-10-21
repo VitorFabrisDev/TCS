@@ -11,11 +11,6 @@ public class Anuncio {
     )
     private long id;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "idCategoriaProdutoAgricultor"
-    )
-    private CategoriaProdutoAgricultor categoriaProdutoAgricultor;
 
     @Column(
             name = "descricao"
@@ -23,7 +18,7 @@ public class Anuncio {
     private String descricao;
 
     @Column(
-            name = "descricao"
+            name = "valor"
     )
     private Double valor;
 
@@ -69,13 +64,6 @@ public class Anuncio {
         this.id = id;
     }
 
-    public CategoriaProdutoAgricultor getCategoriaProdutoAgricultor() {
-        return categoriaProdutoAgricultor;
-    }
-
-    public void setCategoriaProdutoAgricultor(CategoriaProdutoAgricultor categoriaProdutoAgricultor) {
-        this.categoriaProdutoAgricultor = categoriaProdutoAgricultor;
-    }
 
     public String getDescricao() {
         return descricao;

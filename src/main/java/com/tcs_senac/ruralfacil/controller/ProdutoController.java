@@ -1,9 +1,7 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
-import com.tcs_senac.ruralfacil.exception.AgricultorNotFoundException;
-import com.tcs_senac.ruralfacil.exception.ProdutoNotFoundException;
-import com.tcs_senac.ruralfacil.model.Agricultor;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.Produto;
 import com.tcs_senac.ruralfacil.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +28,13 @@ public class ProdutoController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Produto obterProdutoPorId(@PathVariable Long id) throws ProdutoNotFoundException {
+    public Produto obterProdutoPorId(@PathVariable Long id) throws NotFoundException {
         return produtoService.obterProdutoPorId(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) throws ProdutoNotFoundException {
+    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) throws NotFoundException {
         return produtoService.atualizarProduto(id, produto);
     }
 }
