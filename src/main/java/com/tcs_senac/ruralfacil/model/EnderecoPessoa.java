@@ -1,12 +1,13 @@
 package com.tcs_senac.ruralfacil.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class EnderecoPessoa {
+public class EnderecoPessoa extends EntityId{
+
+
 
     @ManyToOne
     @JoinColumn(name = "idEndereco")
@@ -20,6 +21,7 @@ public class EnderecoPessoa {
     @ManyToOne
     @JoinColumn(name = "idAgricultor", nullable = true)
     private Agricultor agricultor;
+
 
 
 }

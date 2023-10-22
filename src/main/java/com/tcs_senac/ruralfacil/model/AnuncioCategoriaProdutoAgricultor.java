@@ -3,9 +3,11 @@ package com.tcs_senac.ruralfacil.model;
 import com.tcs_senac.ruralfacil.Enum.Categoria;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class AnuncioCategoriaProdutoAgricultor {
+public class AnuncioCategoriaProdutoAgricultor extends EntityId{
+
 
     @ManyToOne
     @JoinColumn(
@@ -30,4 +32,5 @@ public class AnuncioCategoriaProdutoAgricultor {
             name = "idAgricultor"
     )
     private Agricultor agricultor;
+
 }

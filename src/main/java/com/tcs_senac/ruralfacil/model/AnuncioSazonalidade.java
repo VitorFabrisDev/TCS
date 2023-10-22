@@ -2,13 +2,13 @@ package com.tcs_senac.ruralfacil.model;
 
 import com.tcs_senac.ruralfacil.Enum.Sazonalidade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class AnuncioSazonalidade {
+public class AnuncioSazonalidade extends EntityId {
+
 
     @ManyToOne
     @JoinColumn(
@@ -19,5 +19,18 @@ public class AnuncioSazonalidade {
             name = "Sazonalidade"
     )
     private Sazonalidade sazonalidade;
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AnuncioSazonalidade that = (AnuncioSazonalidade) o;
+        return Objects.equals(anuncio, that.anuncio) &&
+                sazonalidade == that.sazonalidade;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(anuncio, sazonalidade);
+    }
 
 }

@@ -1,9 +1,10 @@
 package com.tcs_senac.ruralfacil.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-public class Agricultor {
+public class Agricultor extends Pessoa{
 
 
     @Id
@@ -33,6 +34,9 @@ public class Agricultor {
     )
     private char ativo;
 
+    public Agricultor(String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+        super(cpf, nome, dataNascimento, email, whatsApp);
+    }
     public long getId() {
         return id;
     }
