@@ -12,8 +12,12 @@ import static com.tcs_senac.ruralfacil.Enum.Categoria.MUDAS_SEMENTES;
 @RestController
 public class TesteController {
 
+
+    private static ProdutoRepository produtoRepository;
     @Autowired
-    public ProdutoRepository produtoRepository;
+    public TesteController() {
+        this.produtoRepository = produtoRepository;
+    }
 
     @GetMapping("/teste")
     public String teste() {
@@ -22,6 +26,7 @@ public class TesteController {
         produto.setDescricao("Semente Alface Americana");
         produto.setCategoria(categoria);
         produto = produtoRepository.save(produto);
+        produtoRepository.save(produto);
 
         return "OK";
     }
