@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/endereco")
-public class EnderecoController {
+public class EnderecoController extends AbstractController{
 
     @Autowired
     private EnderecoService enderecoService;

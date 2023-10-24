@@ -1,4 +1,4 @@
 package com.tcs_senac.ruralfacil.controller;
 
-public class ClienteController {
+public class ClienteController extends AbstractController{
 }

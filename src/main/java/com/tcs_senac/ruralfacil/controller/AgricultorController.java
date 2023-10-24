@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/agricultor")
-public class AgricultorController {
+public class AgricultorController extends AbstractController{
     @Autowired
     private AgricultorService agricultorService;
 

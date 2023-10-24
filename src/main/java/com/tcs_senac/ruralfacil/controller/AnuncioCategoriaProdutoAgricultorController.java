@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/anunciocategoriaprodutoagricultor")
-public class AnuncioCategoriaProdutoAgricultorController {
+public class AnuncioCategoriaProdutoAgricultorController extends AbstractController{
 
     @Autowired
     private AnuncioCategoriaProdutoAgricultorService anuncioCategoriaProdutoAgricultorService;

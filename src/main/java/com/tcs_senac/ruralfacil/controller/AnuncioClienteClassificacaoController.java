@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/anuncioclienteclassificacao")
-public class AnuncioClienteClassificacaoController {
+public class AnuncioClienteClassificacaoController extends AbstractController{
 
     @Autowired
     private AnuncioClienteClassificacaoService anuncioClienteClassificacaoService;

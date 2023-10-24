@@ -1,4 +1,4 @@
-package com.tcs_senac.ruralfacil;
+package com.satc.satcloja;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.tcs_senac.ruralfacil.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.satc.satcloja.resource"))
                 .build()
                 .pathMapping("/")
                 .apiInfo(apiInfo());
@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Rural Fácil")
+                .title("Loja de Informatica")
                 .description("Documentação completa")
                 .version("1.0")
                 .build();

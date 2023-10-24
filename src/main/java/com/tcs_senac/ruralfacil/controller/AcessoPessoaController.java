@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/acessopessoa")
-public class AcessoPessoaController {
+public class AcessoPessoaController extends AbstractController{
     @Autowired
     private AcessoPessoaService acessoPessoaService;
 
