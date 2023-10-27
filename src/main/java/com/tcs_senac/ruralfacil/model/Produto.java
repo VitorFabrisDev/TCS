@@ -1,6 +1,6 @@
 package com.tcs_senac.ruralfacil.model;
 
-import com.tcs_senac.ruralfacil.Enum.Categoria;
+import com.tcs_senac.ruralfacil.model.Enum.Categoria;
 
 import javax.persistence.*;
 
@@ -26,6 +26,14 @@ public class Produto{
             name = "idCategoria"
     )
     private Categoria categoria;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getDescricao() {
         return descricao;

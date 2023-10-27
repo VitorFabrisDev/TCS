@@ -1,13 +1,13 @@
 package com.tcs_senac.ruralfacil.teste;
 
-import com.tcs_senac.ruralfacil.Enum.Categoria;
+import com.tcs_senac.ruralfacil.model.Enum.Categoria;
 import com.tcs_senac.ruralfacil.model.Produto;
 import com.tcs_senac.ruralfacil.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.tcs_senac.ruralfacil.Enum.Categoria.MUDAS_SEMENTES;
+import static com.tcs_senac.ruralfacil.model.Enum.Categoria.MUDAS_SEMENTES;
 
 @RestController
 public class TesteController {

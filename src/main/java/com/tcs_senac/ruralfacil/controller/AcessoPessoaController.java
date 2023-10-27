@@ -1,6 +1,7 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
+import com.tcs_senac.ruralfacil.dto.AcessoPessoaDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
@@ -10,33 +11,39 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/acessopessoa")
-public class AcessoPessoaController extends AbstractController{
+public class AcessoPessoaController extends AbstractController {
+
     @Autowired
     private AcessoPessoaService acessoPessoaService;
 
-    @PostMapping("/cadastrar")
-    public AcessoPessoa acessoPessoa(@Valid @RequestBody AcessoPessoa acessoPessoa) {
-        return acessoPessoaService.cadastrarAcessoPessoa(acessoPessoa);
+    @PostMapping
+    public AcessoPessoaDto cadastrarAcessoPessoa(@Valid @RequestBody AcessoPessoaDto acessoPessoaDTO) {
+        AcessoPessoa acessoPessoa = acessoPessoaService.cadastrarAcessoPessoa(acessoPessoaDTO.toEntity());
+        return AcessoPessoaDto.fromEntity(acessoPessoa);
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public List<AcessoPessoa> listarAcessos() {
-
-        return acessoPessoaService.listarAcessos();
+    public List<AcessoPessoaDto> listarAcessos() {
+        List<AcessoPessoa> acessos = acessoPessoaService.listarAcessos();
+        return acessos.stream().map(AcessoPessoaDto::fromEntity).collect(Collectors.toList());
     }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public AcessoPessoa obterAcessoPessoaPorId(@PathVariable(value = "id") Long id) throws NotFoundException {
-        return acessoPessoaService.obterAcessoPessoaPorId(id);
+    public AcessoPessoaDto obterAcessoPessoaPorId(@PathVariable Long id) throws NotFoundException {
+        AcessoPessoa acessoPessoa = acessoPessoaService.obterAcessoPessoaPorId(id);
+        return AcessoPessoaDto.fromEntity(acessoPessoa);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public AcessoPessoa atualizarAcessoPessoa(@PathVariable(value = "id") Long id, @RequestBody AcessoPessoa acessoPessoa) throws NotFoundException {
-        return acessoPessoaService.atualizarAcessoPessoa(id, acessoPessoa);
+    public AcessoPessoaDto atualizarAcessoPessoa(@PathVariable Long id, @RequestBody AcessoPessoaDto acessoPessoaDTO) throws NotFoundException {
+        AcessoPessoa acessoPessoa = acessoPessoaService.atualizarAcessoPessoa(id, acessoPessoaDTO.toEntity());
+        return AcessoPessoaDto.fromEntity(acessoPessoa);
     }
 }

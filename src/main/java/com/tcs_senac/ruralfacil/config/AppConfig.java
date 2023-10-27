@@ -1,4 +1,4 @@
-package com.tcs_senac.ruralfacil;
+package com.tcs_senac.ruralfacil.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

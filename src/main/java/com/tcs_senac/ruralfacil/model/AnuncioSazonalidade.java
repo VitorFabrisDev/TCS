@@ -1,9 +1,8 @@
 package com.tcs_senac.ruralfacil.model;
 
-import com.tcs_senac.ruralfacil.Enum.Sazonalidade;
+import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +11,7 @@ public class AnuncioSazonalidade extends EntityId {
 
     @ManyToOne
     @JoinColumn(
-            name = "idAnuncioo"
+            name = "idAnuncio"
     )
     private Anuncio anuncio;
     @Column(

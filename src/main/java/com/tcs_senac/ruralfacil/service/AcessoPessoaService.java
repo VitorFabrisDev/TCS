@@ -40,7 +40,7 @@ public class AcessoPessoaService {
     public AcessoPessoa atualizarAcessoPessoa(Long id, AcessoPessoa acessoPessoaAtualizada) throws NotFoundException {
         AcessoPessoa acessoExistente = (AcessoPessoa) obterAcessoPessoaPorId(id);
         acessoExistente.setLogin(acessoPessoaAtualizada.getLogin());
-        acessoExistente.setSenha(acessoPessoaAtualizada.getSenha());
+        acessoExistente.setPassword(acessoPessoaAtualizada.getPassword());
         acessoExistente.setQtdAcesso(acessoPessoaAtualizada.getQtdAcesso());
         acessoExistente.setDtUltAcesso(acessoPessoaAtualizada.getDtUltAcesso());
         return acessoPessoaRepository.save(acessoExistente);

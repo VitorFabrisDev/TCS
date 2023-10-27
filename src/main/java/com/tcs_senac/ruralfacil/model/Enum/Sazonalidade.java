@@ -1,4 +1,4 @@
-package com.tcs_senac.ruralfacil.Enum;
+package com.tcs_senac.ruralfacil.model.Enum;
 
 public enum Sazonalidade {
 
