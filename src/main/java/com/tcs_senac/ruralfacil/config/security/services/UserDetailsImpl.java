@@ -12,9 +12,7 @@ import java.util.*;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private Long idCliente;
-    private Long idAgricultor;
+    private long id;
     private String login;
     private Roles admin;
 
@@ -23,12 +21,10 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, long idCliente, long idAgricultor, String login, String password,
+    public UserDetailsImpl(long id, String login, String password,
                            Collection<? extends GrantedAuthority> authorities
     ) {
         this.id = id;
-        this.idCliente = idCliente;
-        this.idAgricultor = idAgricultor;
         this.login = login;
         this.password = password;
         this.authorities = authorities;
@@ -41,8 +37,6 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 acessoPessoa.get().getId(),
-                acessoPessoa.get().getCliente().getId(),
-                acessoPessoa.get().getAgricultor().getId(),
                 acessoPessoa.get().getLogin(),
                 acessoPessoa.get().getPassword(),
                 authorities
@@ -54,7 +48,8 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {
+
+    public long getId() {
         return id;
     }
 

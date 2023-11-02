@@ -63,9 +63,16 @@ public class AcessoPessoa{
         this.admin = admin;
     }
 
+    public AcessoPessoa(String login, String password, Roles admin) {
+        this.login = login;
+        this.password = password;
+        this.admin = admin;
+    }
+
     public AcessoPessoa() {
 
     }
+
 
 
     public long getId() {
