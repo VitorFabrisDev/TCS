@@ -26,12 +26,6 @@ public class AcessoPessoaDto {
 
     public static AcessoPessoaDto fromEntity(AcessoPessoa acessoPessoa) {
         AcessoPessoaDto dto = new AcessoPessoaDto();
-        if (acessoPessoa.getCliente() != null) {
-            dto.setCliente(ClienteDto.fromEntity(acessoPessoa.getCliente()));
-        }
-        if (acessoPessoa.getAgricultor() != null) {
-            dto.setAgricultor(AgricultorDto.fromEntity(acessoPessoa.getAgricultor()));
-        }
         dto.setLogin(acessoPessoa.getLogin());
         dto.setPassword(acessoPessoa.getPassword());
         dto.setQtdAcesso(acessoPessoa.getQtdAcesso());
@@ -42,12 +36,7 @@ public class AcessoPessoaDto {
 
     public AcessoPessoa toEntity() {
         AcessoPessoa acessoPessoa = new AcessoPessoa();
-        if (this.getCliente() != null) {
-            acessoPessoa.setCliente(this.getCliente().toEntity());
-        }
-        if (this.getAgricultor() != null) {
-            acessoPessoa.setAgricultor(this.getAgricultor().toEntity());
-        }
+
         acessoPessoa.setLogin(this.getLogin());
         acessoPessoa.setPassword(this.getPassword());
         acessoPessoa.setQtdAcesso(this.getQtdAcesso());

@@ -1,5 +1,6 @@
 package com.tcs_senac.ruralfacil.dto;
 
+import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class ClienteDto {
 
+    private AcessoPessoa acessoPessoa;
     private String cpf;
     private String nome;
     private Date dataNascimento;
@@ -33,6 +35,14 @@ public class ClienteDto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public AcessoPessoa getAcessoPessoa() {
+        return acessoPessoa;
+    }
+
+    public void setAcessoPessoa(AcessoPessoa acessoPessoa) {
+        this.acessoPessoa = acessoPessoa;
     }
 
     public Date getDataNascimento() {
@@ -73,7 +83,7 @@ public class ClienteDto {
     }
 
     public Cliente toEntity() {
-        Cliente cliente = new Cliente(this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
+        Cliente cliente = new Cliente(this.getAcessoPessoa(),this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
         // Configure outros campos, se aplicável
         return cliente;
     }

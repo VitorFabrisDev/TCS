@@ -34,9 +34,14 @@ public class Agricultor extends Pessoa{
     )
     private char ativo;
 
-    public Agricultor(String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
-        super(cpf, nome, dataNascimento, email, whatsApp);
+    public Agricultor(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+        super(acessoPessoa, cpf, nome, dataNascimento, email, whatsApp);
     }
+
+    public Agricultor() {
+        super();
+    }
+
     public long getId() {
         return id;
     }

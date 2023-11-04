@@ -8,10 +8,9 @@ import java.util.Date;
 @Entity
 public class Cliente extends Pessoa{
 
-    public Cliente(String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
-        super(cpf, nome, dataNascimento, email, whatsApp);
+    public Cliente(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+        super(acessoPessoa, cpf, nome, dataNascimento, email, whatsApp);
     }
-
 
 
     @Id
@@ -19,6 +18,11 @@ public class Cliente extends Pessoa{
             strategy = GenerationType.AUTO
     )
     private long id;
+
+    public Cliente() {
+        super();
+    }
+
 
     public long getId() {
         return id;

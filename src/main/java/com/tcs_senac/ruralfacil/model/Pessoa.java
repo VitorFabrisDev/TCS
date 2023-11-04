@@ -6,10 +6,14 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class Pessoa {
 
+    @OneToOne
+    @JoinColumn(name = "idAcessoPessoa")
+    private AcessoPessoa acessoPessoa;
     @Column(
             name = "cpf"
     )
     private String cpf;
+
 
     @Column(
             name = "nome"
@@ -30,12 +34,25 @@ public abstract class Pessoa {
     )
     private String whatsApp;
 
-    public Pessoa(String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+    public Pessoa(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+        this.acessoPessoa = acessoPessoa;
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.whatsApp = whatsApp;
+    }
+
+    public Pessoa() {
+
+    }
+
+    public AcessoPessoa getAcessoPessoa() {
+        return acessoPessoa;
+    }
+
+    public void setAcessoPessoa(AcessoPessoa acessoPessoa) {
+        this.acessoPessoa = acessoPessoa;
     }
 
     public String getCpf() {

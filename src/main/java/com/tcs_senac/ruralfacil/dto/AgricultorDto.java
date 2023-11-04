@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Agricultor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 
 public class AgricultorDto {
 
+    private AcessoPessoa acessoPessoa;
     private String cpf;
     private String nome;
     private Date dataNascimento;
@@ -21,7 +23,13 @@ public class AgricultorDto {
     private char organico;
     private char ativo;
 
+    public AcessoPessoa getAcessoPessoa() {
+        return acessoPessoa;
+    }
 
+    public void setAcessoPessoa(AcessoPessoa acessoPessoa) {
+        this.acessoPessoa = acessoPessoa;
+    }
 
     public String getCpf() {
         return cpf;
@@ -113,7 +121,7 @@ public class AgricultorDto {
     }
 
     public Agricultor toEntity() {
-        Agricultor agricultor = new Agricultor(this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
+        Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
         agricultor.setInscricaoEstadual(this.getInscricaoEstadual());
         agricultor.setCaf(this.getCaf());
         agricultor.setOrganico(this.getOrganico());

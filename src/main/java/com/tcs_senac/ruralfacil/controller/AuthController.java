@@ -2,6 +2,7 @@ package com.tcs_senac.ruralfacil.controller;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -9,8 +10,11 @@ import javax.validation.Valid;
 
 import com.tcs_senac.ruralfacil.config.security.jwt.JwtUtils;
 import com.tcs_senac.ruralfacil.config.security.services.UserDetailsImpl;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.exception.TokenRefreshException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
+import com.tcs_senac.ruralfacil.model.Agricultor;
+import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.model.Enum.Roles;
 import com.tcs_senac.ruralfacil.model.RefreshToken;
 import com.tcs_senac.ruralfacil.payload.request.LoginRequest;
@@ -20,6 +24,8 @@ import com.tcs_senac.ruralfacil.payload.response.JwtResponse;
 import com.tcs_senac.ruralfacil.payload.response.MessageResponse;
 import com.tcs_senac.ruralfacil.payload.response.TokenRefreshResponse;
 import com.tcs_senac.ruralfacil.repository.AcessoPessoaRepository;
+import com.tcs_senac.ruralfacil.repository.AgricultorRepository;
+import com.tcs_senac.ruralfacil.repository.ClienteRepository;
 import com.tcs_senac.ruralfacil.repository.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +51,11 @@ public class AuthController {
     @Autowired
     AcessoPessoaRepository acessoPessoaRepository;
 
+    @Autowired
+    ClienteRepository clienteRepository;
+
+    @Autowired
+    AgricultorRepository agricultorRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -89,26 +100,80 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        Roles roles;
+        Roles roles = null;
 
-        String selectedRole = signUpRequest.getRole().toString();
-        if ("CLIENTE".equals(selectedRole)) {
-            roles = Roles.ROLE_CLIENTE;
-        } else if ("AGRICULTOR".equals(selectedRole)) {
-            roles = Roles.ROLE_AGRICULTOR;
-        } else if ("ADMINISTRADOR".equals(selectedRole)) {
-            roles = Roles.ROLE_ADMIN;
-        } else {
-            roles = Roles.ROLE_CLIENTE;
+        Set<String> rolesSet = signUpRequest.getRole();
+        String selectedRole = null;
+
+        if (rolesSet != null && !rolesSet.isEmpty()) {
+
+            selectedRole = rolesSet.iterator().next();
         }
+
         AcessoPessoa acessoPessoa = new AcessoPessoa(
                 signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()),
-                roles //
+                roles
         );
 
         acessoPessoa.setAdmin(roles);
         acessoPessoaRepository.save(acessoPessoa);
+
+        if (Roles.ROLE_AGRICULTOR.name().equals(selectedRole)) {
+            roles = Roles.ROLE_AGRICULTOR;
+            Agricultor agricultor = signUpRequest.getAgricultor();
+            if (agricultor != null) {
+                Agricultor newAgricultor = new Agricultor();
+                newAgricultor.setCpf(agricultor.getCpf());
+                newAgricultor.setNome(agricultor.getNome());
+                newAgricultor.setDataNascimento(agricultor.getDataNascimento());
+                newAgricultor.setEmail(agricultor.getEmail());
+                newAgricultor.setWhatsApp(agricultor.getWhatsApp());
+                newAgricultor.setCaf(agricultor.getCaf());
+                newAgricultor.setOrganico(agricultor.getOrganico());
+                newAgricultor.setAtivo(agricultor.getAtivo());
+                newAgricultor.setInscricaoEstadual(agricultor.getInscricaoEstadual());
+                newAgricultor.setAcessoPessoa(acessoPessoa);
+
+                agricultorRepository.save(newAgricultor);
+            }
+            Cliente cliente = signUpRequest.getCliente();
+            if (cliente != null) {
+                Cliente newCliente = new Cliente();
+                newCliente.setCpf(cliente.getCpf());
+                newCliente.setNome(cliente.getNome());
+                newCliente.setDataNascimento(cliente.getDataNascimento());
+                newCliente.setEmail(cliente.getEmail());
+                newCliente.setWhatsApp(cliente.getWhatsApp());
+                newCliente.setAcessoPessoa(acessoPessoa);
+
+                clienteRepository.save(newCliente);
+
+            }
+
+        }  else if (Roles.ROLE_ADMIN.name().equals(selectedRole)){
+            roles = Roles.ROLE_ADMIN;
+        } else if (Roles.ROLE_CLIENTE.name().equals(selectedRole)) {
+            roles = Roles.ROLE_CLIENTE;
+            Cliente cliente = signUpRequest.getCliente();
+            if (cliente != null) {
+
+                Cliente newCliente = new Cliente();
+                newCliente.setCpf(cliente.getCpf());
+                newCliente.setNome(cliente.getNome());
+                newCliente.setDataNascimento(cliente.getDataNascimento());
+                newCliente.setEmail(cliente.getEmail());
+                newCliente.setWhatsApp(cliente.getWhatsApp());
+                newCliente.setAcessoPessoa(acessoPessoa);
+
+                clienteRepository.save(newCliente);
+            }
+            else {
+                throw new NotFoundException("Perfil não encontrado: " + selectedRole);
+            }
+
+        }
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

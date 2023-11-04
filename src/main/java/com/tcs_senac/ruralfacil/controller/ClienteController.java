@@ -42,7 +42,7 @@ public class ClienteController extends AbstractController {
 
     // Método para mapear um ClienteDTO para a entidade Cliente
     private Cliente mapClienteDTOToEntity(ClienteDto clienteDTO) {
-        Cliente cliente = new Cliente(clienteDTO.getCpf(), clienteDTO.getNome(), clienteDTO.getDataNascimento(), clienteDTO.getEmail(), clienteDTO.getWhatsApp());
+        Cliente cliente = new Cliente(clienteDTO.getAcessoPessoa(), clienteDTO.getCpf(), clienteDTO.getNome(), clienteDTO.getDataNascimento(), clienteDTO.getEmail(), clienteDTO.getWhatsApp());
         // Outros campos, se aplicável
         return cliente;
     }

@@ -15,18 +15,6 @@ public class AcessoPessoa{
     )
     private long id;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "idCliente", nullable = true
-    )
-    private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "idAgricultor", nullable = true
-    )
-    private Agricultor agricultor;
-
     @Column(
             name = "login"
     )
@@ -52,10 +40,8 @@ public class AcessoPessoa{
     )
     private Roles admin;
 
-    public AcessoPessoa(long id, Cliente cliente, Agricultor agricultor, String login, String password, long qtdAcesso, Date dtUltAcesso, Roles admin) {
+    public AcessoPessoa(long id, String login, String password, long qtdAcesso, Date dtUltAcesso, Roles admin) {
         this.id = id;
-        this.cliente = cliente;
-        this.agricultor = agricultor;
         this.login = login;
         this.password = password;
         this.qtdAcesso = qtdAcesso;
@@ -81,22 +67,6 @@ public class AcessoPessoa{
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Agricultor getAgricultor() {
-        return agricultor;
-    }
-
-    public void setAgricultor(Agricultor agricultor) {
-        this.agricultor = agricultor;
     }
 
     public String getLogin() {
