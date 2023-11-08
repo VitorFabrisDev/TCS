@@ -100,16 +100,18 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        Roles roles = null;
+        Roles roles;
 
-        Set<String> rolesSet = signUpRequest.getRole();
-        String selectedRole = null;
-
-        if (rolesSet != null && !rolesSet.isEmpty()) {
-
-            selectedRole = rolesSet.iterator().next();
+        String selectedRole = signUpRequest.getRole().toString();
+        if ("CLIENTE".equals(selectedRole)) {
+            roles = Roles.ROLE_CLIENTE;
+        } else if ("AGRICULTOR".equals(selectedRole)) {
+            roles = Roles.ROLE_AGRICULTOR;
+        } else if ("ADMINISTRADOR".equals(selectedRole)) {
+            roles = Roles.ROLE_ADMIN;
+        } else {
+            roles = Roles.ROLE_CLIENTE;
         }
-
         AcessoPessoa acessoPessoa = new AcessoPessoa(
                 signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()),
@@ -118,62 +120,6 @@ public class AuthController {
 
         acessoPessoa.setAdmin(roles);
         acessoPessoaRepository.save(acessoPessoa);
-
-        if (Roles.ROLE_AGRICULTOR.name().equals(selectedRole)) {
-            roles = Roles.ROLE_AGRICULTOR;
-            Agricultor agricultor = signUpRequest.getAgricultor();
-            if (agricultor != null) {
-                Agricultor newAgricultor = new Agricultor();
-                newAgricultor.setCpf(agricultor.getCpf());
-                newAgricultor.setNome(agricultor.getNome());
-                newAgricultor.setDataNascimento(agricultor.getDataNascimento());
-                newAgricultor.setEmail(agricultor.getEmail());
-                newAgricultor.setWhatsApp(agricultor.getWhatsApp());
-                newAgricultor.setCaf(agricultor.getCaf());
-                newAgricultor.setOrganico(agricultor.getOrganico());
-                newAgricultor.setAtivo(agricultor.getAtivo());
-                newAgricultor.setInscricaoEstadual(agricultor.getInscricaoEstadual());
-                newAgricultor.setAcessoPessoa(acessoPessoa);
-
-                agricultorRepository.save(newAgricultor);
-            }
-            Cliente cliente = signUpRequest.getCliente();
-            if (cliente != null) {
-                Cliente newCliente = new Cliente();
-                newCliente.setCpf(cliente.getCpf());
-                newCliente.setNome(cliente.getNome());
-                newCliente.setDataNascimento(cliente.getDataNascimento());
-                newCliente.setEmail(cliente.getEmail());
-                newCliente.setWhatsApp(cliente.getWhatsApp());
-                newCliente.setAcessoPessoa(acessoPessoa);
-
-                clienteRepository.save(newCliente);
-
-            }
-
-        }  else if (Roles.ROLE_ADMIN.name().equals(selectedRole)){
-            roles = Roles.ROLE_ADMIN;
-        } else if (Roles.ROLE_CLIENTE.name().equals(selectedRole)) {
-            roles = Roles.ROLE_CLIENTE;
-            Cliente cliente = signUpRequest.getCliente();
-            if (cliente != null) {
-
-                Cliente newCliente = new Cliente();
-                newCliente.setCpf(cliente.getCpf());
-                newCliente.setNome(cliente.getNome());
-                newCliente.setDataNascimento(cliente.getDataNascimento());
-                newCliente.setEmail(cliente.getEmail());
-                newCliente.setWhatsApp(cliente.getWhatsApp());
-                newCliente.setAcessoPessoa(acessoPessoa);
-
-                clienteRepository.save(newCliente);
-            }
-            else {
-                throw new NotFoundException("Perfil não encontrado: " + selectedRole);
-            }
-
-        }
-
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

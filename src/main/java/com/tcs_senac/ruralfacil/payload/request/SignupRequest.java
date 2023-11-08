@@ -18,8 +18,6 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
-    private Cliente cliente;
-    private Agricultor agricultor;
 
 
     public String getUsername() {
@@ -46,19 +44,4 @@ public class SignupRequest {
         this.role = role;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Agricultor getAgricultor() {
-        return agricultor;
-    }
-
-    public void setAgricultor(Agricultor agricultor) {
-        this.agricultor = agricultor;
-    }
 }
