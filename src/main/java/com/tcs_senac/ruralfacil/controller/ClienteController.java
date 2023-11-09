@@ -1,8 +1,12 @@
 package com.tcs_senac.ruralfacil.controller;
 
 import com.tcs_senac.ruralfacil.dto.ClienteDto;
+import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Cliente;
+import com.tcs_senac.ruralfacil.model.Endereco;
+import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
 import com.tcs_senac.ruralfacil.service.ClienteService;
+import com.tcs_senac.ruralfacil.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +19,28 @@ public class ClienteController extends AbstractController {
 
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private EnderecoService enderecoService;
+
+    @Autowired
+    private AcessoPessoaService acessoPessoaService;
 
     @PostMapping
     public Cliente cadastrarCliente(@Valid @RequestBody ClienteDto clienteDto) {
-        // Mapeie o ClienteDTO para a entidade Cliente antes de chamar o serviço
+
+        AcessoPessoa acessoPessoa = acessoPessoaService.obterAcessoPessoaByLogin(clienteDto.getAcessoPessoa().getLogin());
+
         Cliente cliente = mapClienteDTOToEntity(clienteDto);
+
+
+
+        Endereco endereco = cliente.getEndereco();
+        if (endereco != null) {
+            enderecoService.cadastrarEndereco(endereco);
+        }
+
+        cliente.setAcessoPessoa(acessoPessoa);
+
         return clienteService.cadastrarCliente(cliente);
     }
 
@@ -35,15 +56,12 @@ public class ClienteController extends AbstractController {
 
     @PutMapping("/{id}")
     public Cliente atualizarCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto) {
-        // Mapeie o ClienteDTO para a entidade Cliente antes de chamar o serviço
         Cliente cliente = mapClienteDTOToEntity(clienteDto);
         return clienteService.atualizarCliente(id, cliente);
     }
 
-    // Método para mapear um ClienteDTO para a entidade Cliente
     private Cliente mapClienteDTOToEntity(ClienteDto clienteDTO) {
-        Cliente cliente = new Cliente(clienteDTO.getAcessoPessoa(), clienteDTO.getCpf(), clienteDTO.getNome(), clienteDTO.getDataNascimento(), clienteDTO.getEmail(), clienteDTO.getWhatsApp());
-        // Outros campos, se aplicável
+        Cliente cliente = new Cliente(clienteDTO.getAcessoPessoa(), clienteDTO.getEndereco(), clienteDTO.getCpf(), clienteDTO.getNome(), clienteDTO.getDataNascimento(), clienteDTO.getEmail(), clienteDTO.getWhatsApp());
         return cliente;
     }
 }

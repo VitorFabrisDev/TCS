@@ -18,7 +18,7 @@ public class AgricultorService {
         this.agricultorRepository = agricultorRepository;
     }
 
-    public Agricultor cadastrarAgricultorPessoa(Agricultor agricultor) {
+    public Agricultor cadastrarAgricultor(Agricultor agricultor) {
         return agricultorRepository.save(agricultor);
 
     }
@@ -27,7 +27,7 @@ public class AgricultorService {
         return agricultorRepository.findAll();
     }
 
-    public Agricultor obterAgricultorPessoa(Long id) throws NotFoundException {
+    public Agricultor obterAgricultorPorId(Long id) throws NotFoundException {
         Optional<Agricultor> agricultor = agricultorRepository.findById(id);
         if (agricultor.isPresent()) {
             return agricultor.get();
@@ -37,7 +37,7 @@ public class AgricultorService {
     }
 
     public Agricultor atualizarAgricultor(Long id, Agricultor agricultorAtualizado) throws NotFoundException {
-            Agricultor agricultorExistente = (Agricultor) obterAgricultorPessoa(id);
+            Agricultor agricultorExistente = (Agricultor) obterAgricultorPorId(id);
             agricultorExistente.setInscricaoEstadual(agricultorAtualizado.getInscricaoEstadual());
             agricultorExistente.setCaf(agricultorAtualizado.getCaf());
             agricultorExistente.setOrganico(agricultorAtualizado.getOrganico());

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
+
 public class AcessoPessoa{
 
     @Id

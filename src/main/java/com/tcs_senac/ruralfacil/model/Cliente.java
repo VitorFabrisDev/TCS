@@ -2,14 +2,15 @@ package com.tcs_senac.ruralfacil.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
 @Entity
 public class Cliente extends Pessoa{
 
-    public Cliente(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
-        super(acessoPessoa, cpf, nome, dataNascimento, email, whatsApp);
+    public Cliente(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
     }
 
 

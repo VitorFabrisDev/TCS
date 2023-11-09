@@ -1,11 +1,12 @@
 package com.tcs_senac.ruralfacil.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Agricultor;
+import com.tcs_senac.ruralfacil.model.Endereco;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -13,15 +14,16 @@ import org.springframework.data.domain.Pageable;
 public class AgricultorDto {
 
     private AcessoPessoa acessoPessoa;
+    private Endereco endereco;
     private String cpf;
     private String nome;
-    private Date dataNascimento;
+    private LocalDateTime dataNascimento;
     private String email;
     private String whatsApp;
     private String inscricaoEstadual;
     private String caf;
-    private char organico;
-    private char ativo;
+    private boolean organico;
+    private boolean ativo;
 
     public AcessoPessoa getAcessoPessoa() {
         return acessoPessoa;
@@ -29,6 +31,14 @@ public class AgricultorDto {
 
     public void setAcessoPessoa(AcessoPessoa acessoPessoa) {
         this.acessoPessoa = acessoPessoa;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public String getCpf() {
@@ -47,11 +57,11 @@ public class AgricultorDto {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDateTime getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDateTime dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -87,19 +97,19 @@ public class AgricultorDto {
         this.caf = caf;
     }
 
-    public char getOrganico() {
+    public boolean getOrganico() {
         return organico;
     }
 
-    public void setOrganico(char organico) {
+    public void setOrganico(boolean organico) {
         this.organico = organico;
     }
 
-    public char getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(char ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -121,12 +131,12 @@ public class AgricultorDto {
     }
 
     public Agricultor toEntity() {
-        Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
+        Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getEndereco(),this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp(), this.getInscricaoEstadual(), this.getCaf(), this.getOrganico(), this.getAtivo());
         agricultor.setInscricaoEstadual(this.getInscricaoEstadual());
         agricultor.setCaf(this.getCaf());
         agricultor.setOrganico(this.getOrganico());
         agricultor.setAtivo(this.getAtivo());
-        // Configure outros campos, se aplicável
+
         return agricultor;
     }
 

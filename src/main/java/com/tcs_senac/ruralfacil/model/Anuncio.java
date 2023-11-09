@@ -11,11 +11,14 @@ public class Anuncio {
     )
     private long id;
 
-
+    @OneToOne
+    @JoinColumn(name = "idProduto")
+    private Produto produto;
     @Column(
             name = "descricao"
     )
     private String descricao;
+
 
     @Column(
             name = "valor"
@@ -60,10 +63,34 @@ public class Anuncio {
         return id;
     }
 
+
     public void setId(long id) {
         this.id = id;
     }
 
+    public Anuncio(Produto produto, String descricao, Double valor, String classificacao, char organico, String foto1, String foto2, String foto3, String foto4, String foto5) {
+        this.produto = produto;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.classificacao = classificacao;
+        this.organico = organico;
+        this.foto1 = foto1;
+        this.foto2 = foto2;
+        this.foto3 = foto3;
+        this.foto4 = foto4;
+        this.foto5 = foto5;
+    }
+
+    public Anuncio(){
+
+    }
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
     public String getDescricao() {
         return descricao;

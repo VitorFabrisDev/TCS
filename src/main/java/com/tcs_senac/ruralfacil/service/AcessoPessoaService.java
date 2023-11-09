@@ -37,6 +37,17 @@ public class AcessoPessoaService {
         }
     }
 
+    public AcessoPessoa obterAcessoPessoaByLogin(String login) {
+
+        Optional<AcessoPessoa> acessoPessoa = acessoPessoaRepository.findByLogin(login);
+        //return acessoPessoaRepository.findByLogin(login);
+        if (acessoPessoa.isPresent())
+            return acessoPessoa.get();
+        else {
+            throw new NotFoundException("E-mail não cadastrado no Login");
+        }
+    }
+
     public AcessoPessoa atualizarAcessoPessoa(Long id, AcessoPessoa acessoPessoaAtualizada) throws NotFoundException {
         AcessoPessoa acessoExistente = (AcessoPessoa) obterAcessoPessoaPorId(id);
         acessoExistente.setLogin(acessoPessoaAtualizada.getLogin());

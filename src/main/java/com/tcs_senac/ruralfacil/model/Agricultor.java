@@ -1,7 +1,7 @@
 package com.tcs_senac.ruralfacil.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Agricultor extends Pessoa{
@@ -27,19 +27,35 @@ public class Agricultor extends Pessoa{
     @Column(
             name = "organico"
     )
-    private char organico;
+    private boolean organico;
 
     @Column(
             name = "ativo"
     )
-    private char ativo;
+    private boolean ativo;
 
-    public Agricultor(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
-        super(acessoPessoa, cpf, nome, dataNascimento, email, whatsApp);
+
+    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp, long id, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
+        this.id = id;
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.caf = caf;
+        this.organico = organico;
+        this.ativo = ativo;
     }
+
 
     public Agricultor() {
         super();
+    }
+
+    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.caf = caf;
+        this.ativo = ativo;
+        this.organico = organico;
+
     }
 
     public long getId() {
@@ -67,19 +83,27 @@ public class Agricultor extends Pessoa{
         this.caf = caf;
     }
 
-    public char getOrganico() {
+    public boolean getOrganico() {
         return organico;
     }
 
-    public void setOrganico(char organico) {
+    public void setOrganico(boolean organico) {
         this.organico = organico;
     }
 
-    public char getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(char ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public boolean isOrganico() {
+        return organico;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
     }
 }

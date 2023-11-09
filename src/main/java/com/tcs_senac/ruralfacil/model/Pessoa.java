@@ -1,6 +1,7 @@
 package com.tcs_senac.ruralfacil.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @MappedSuperclass
@@ -9,6 +10,10 @@ public abstract class Pessoa {
     @OneToOne
     @JoinColumn(name = "idAcessoPessoa")
     private AcessoPessoa acessoPessoa;
+
+    @OneToOne
+    @JoinColumn(name = "idEndereco")
+    private Endereco endereco;
     @Column(
             name = "cpf"
     )
@@ -22,7 +27,7 @@ public abstract class Pessoa {
     @Column(
             name = "dataNascimento"
     )
-    private Date dataNascimento;
+    private LocalDateTime dataNascimento;
 
     @Column(
             name = "email"
@@ -34,8 +39,9 @@ public abstract class Pessoa {
     )
     private String whatsApp;
 
-    public Pessoa(AcessoPessoa acessoPessoa, String cpf, String nome, Date dataNascimento, String email, String whatsApp) {
+    public Pessoa(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp) {
         this.acessoPessoa = acessoPessoa;
+        this.endereco = endereco;
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -45,6 +51,14 @@ public abstract class Pessoa {
 
     public Pessoa() {
 
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public AcessoPessoa getAcessoPessoa() {
@@ -72,11 +86,11 @@ public abstract class Pessoa {
     }
 
 
-    public Date getDataNascimento() {
+    public LocalDateTime getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDateTime dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
