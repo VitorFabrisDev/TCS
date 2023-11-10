@@ -87,7 +87,6 @@ public class AuthController {
                 refreshToken.getToken(),
                 userDetails.getId(),
                 userDetails.getUsername(),
-                userDetails.getPassword(),
                 roles
         ));
     }

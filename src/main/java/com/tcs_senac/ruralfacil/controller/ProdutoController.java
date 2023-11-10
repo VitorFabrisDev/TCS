@@ -31,21 +31,21 @@ public class ProdutoController extends AbstractController {
 
     @ApiOperation(value = "Listar todos os produtos (requer papel de ADMIN)")
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public List<Produto> listarProdutos() {
         return produtoService.listarProdutos();
     }
 
     @ApiOperation(value = "Obter um produto por ID (requer papel de ADMIN)")
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public Produto obterProdutoPorId(@PathVariable Long id) throws NotFoundException {
         return produtoService.obterProdutoPorId(id);
     }
 
     @ApiOperation(value = "Atualizar um produto por ID (requer papel de ADMIN)")
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public Produto atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDto produtoDTO) throws NotFoundException {
         // Mapeie o ProdutoDTO para a entidade Produto antes de chamar o serviço
         Produto produto = mapProdutoDTOToEntity(produtoDTO);

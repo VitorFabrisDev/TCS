@@ -56,4 +56,5 @@ public class AcessoPessoaService {
         acessoExistente.setDtUltAcesso(acessoPessoaAtualizada.getDtUltAcesso());
         return acessoPessoaRepository.save(acessoExistente);
     }
+
 }

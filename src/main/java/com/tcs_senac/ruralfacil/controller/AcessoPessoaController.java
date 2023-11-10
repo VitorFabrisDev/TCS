@@ -27,18 +27,19 @@ public class AcessoPessoaController extends AbstractController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('Agricultor') and hasRole('Cliente') and hasRole('Administrador')")
     public List<AcessoPessoaDto> listarAcessos() {
         List<AcessoPessoa> acessos = acessoPessoaService.listarAcessos();
         return acessos.stream().map(AcessoPessoaDto::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('Agricultor') and hasRole('Cliente') and hasRole('Administrador')")
     public AcessoPessoaDto obterAcessoPessoaPorId(@PathVariable Long id) throws NotFoundException {
         AcessoPessoa acessoPessoa = acessoPessoaService.obterAcessoPessoaPorId(id);
         return AcessoPessoaDto.fromEntity(acessoPessoa);
     }
+
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")

@@ -34,14 +34,14 @@ public class AnuncioController extends AbstractController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public AnuncioDto obterAnuncioPorId(@PathVariable Long id) throws NotFoundException {
         Anuncio anuncio = anuncioService.obterAnuncioPorId(id);
         return AnuncioDto.fromEntity(anuncio);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     public AnuncioDto atualizarAnuncio(@PathVariable Long id, @RequestBody AnuncioDto anuncioDTO) throws NotFoundException {
         Anuncio anuncio = anuncioService.atualizarAnuncio(id, anuncioDTO.toEntity());
         return AnuncioDto.fromEntity(anuncio);
