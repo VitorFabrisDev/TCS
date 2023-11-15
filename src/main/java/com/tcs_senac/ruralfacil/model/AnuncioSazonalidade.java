@@ -32,4 +32,19 @@ public class AnuncioSazonalidade extends EntityId {
         return Objects.hash(anuncio, sazonalidade);
     }
 
+    public Anuncio getAnuncio() {
+        return anuncio;
+    }
+
+    public void setAnuncio(Anuncio anuncio) {
+        this.anuncio = anuncio;
+    }
+
+    public Sazonalidade getSazonalidade() {
+        return sazonalidade;
+    }
+
+    public void setSazonalidade(Sazonalidade sazonalidade) {
+        this.sazonalidade = sazonalidade;
+    }
 }

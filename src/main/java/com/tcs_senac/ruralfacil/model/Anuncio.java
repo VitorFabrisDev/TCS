@@ -1,6 +1,9 @@
 package com.tcs_senac.ruralfacil.model;
 
+import com.tcs_senac.ruralfacil.model.Enum.Categoria;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Anuncio {
@@ -11,9 +14,12 @@ public class Anuncio {
     )
     private long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idProduto")
     private Produto produto;
+
+    @Column(name = "categoria")
+    private Categoria categoria;
     @Column(
             name = "descricao"
     )
@@ -33,7 +39,7 @@ public class Anuncio {
     @Column(
             name = "organico"
     )
-    private char organico;
+    private boolean organico;
 
     @Column(
             name = "foto1"
@@ -59,17 +65,28 @@ public class Anuncio {
     )
     private String foto5;
 
+    @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnuncioSazonalidade> anunciosazonalidade;
+
     public long getId() {
         return id;
     }
 
+    public List<AnuncioSazonalidade> getAnunciosazonalidade() {
+        return anunciosazonalidade;
+    }
+
+    public void setAnunciosazonalidade(List<AnuncioSazonalidade> anunciosazonalidade) {
+        this.anunciosazonalidade = anunciosazonalidade;
+    }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public Anuncio(Produto produto, String descricao, Double valor, String classificacao, char organico, String foto1, String foto2, String foto3, String foto4, String foto5) {
+    public Anuncio(Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5) {
         this.produto = produto;
+        this.categoria = categoria;
         this.descricao = descricao;
         this.valor = valor;
         this.classificacao = classificacao;
@@ -90,6 +107,14 @@ public class Anuncio {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getDescricao() {
@@ -116,11 +141,11 @@ public class Anuncio {
         this.classificacao = classificacao;
     }
 
-    public char getOrganico() {
+    public boolean getOrganico() {
         return organico;
     }
 
-    public void setOrganico(char organico) {
+    public void setOrganico(boolean organico) {
         this.organico = organico;
     }
 

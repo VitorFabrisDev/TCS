@@ -4,21 +4,43 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tcs_senac.ruralfacil.model.Anuncio;
+import com.tcs_senac.ruralfacil.model.Enum.Categoria;
+import com.tcs_senac.ruralfacil.model.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public class AnuncioDto {
 
+    private Produto produto;
+    private Categoria categoria;
     private String descricao;
     private Double valor;
     private String classificacao;
-    private char organico;
+    private boolean organico;
     private String foto1;
     private String foto2;
     private String foto3;
     private String foto4;
     private String foto5;
+
+    private List<AnuncioSazonalidadeDto> anunciosazonalidade;
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -44,11 +66,11 @@ public class AnuncioDto {
         this.classificacao = classificacao;
     }
 
-    public char getOrganico() {
+    public boolean getOrganico() {
         return organico;
     }
 
-    public void setOrganico(char organico) {
+    public void setOrganico(boolean organico) {
         this.organico = organico;
     }
 

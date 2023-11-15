@@ -13,7 +13,6 @@ public class ProdutoDto {
     private Long id;
     //private String nome;
     private String descricao;
-    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -31,19 +30,11 @@ public class ProdutoDto {
         this.descricao = descricao;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 
     public static ProdutoDto fromEntity(Produto produto) {
         ProdutoDto dto = new ProdutoDto();
         dto.setId(produto.getId());
         dto.setDescricao(produto.getDescricao());
-        dto.setCategoria(produto.getCategoria());
         return dto;
     }
 
@@ -51,7 +42,6 @@ public class ProdutoDto {
         Produto produto = new Produto();
         produto.setId(this.getId());
         produto.setDescricao(this.getDescricao());
-        produto.setCategoria(this.getCategoria());
         return produto;
     }
 

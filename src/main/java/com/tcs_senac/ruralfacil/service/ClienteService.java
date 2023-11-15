@@ -1,9 +1,11 @@
 package com.tcs_senac.ruralfacil.service;
 
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
-import com.tcs_senac.ruralfacil.model.Anuncio;
+import com.tcs_senac.ruralfacil.exception.ValidationException;
 import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.repository.ClienteRepository;
+import com.tcs_senac.ruralfacil.util.CpfValid;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class ClienteService {
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
+        validarCliente(cliente);
         return clienteRepository.save(cliente);
     }
 
@@ -38,6 +41,7 @@ public class ClienteService {
     }
 
     public Cliente atualizarCliente(Long id, Cliente clienteAtualizado) throws NotFoundException {
+        validarCliente(clienteAtualizado);
         Cliente clienteExistente = obterClientePorId(id);
         clienteExistente.setCpf(clienteAtualizado.getCpf());
         clienteExistente.setNome(clienteAtualizado.getNome());
@@ -46,5 +50,24 @@ public class ClienteService {
         clienteExistente.setDataNascimento(clienteAtualizado.getDataNascimento());
         return clienteRepository.save(clienteExistente);
 
+    }
+
+    private void validarCliente(Cliente cliente) throws ValidationException {
+        if (!EmailValidator.getInstance().isValid(cliente.getEmail())) {
+            throw new ValidationException("Aviso: Digite um endereço de e-mail válido!");
+        }
+
+        if (!CpfValid.isValid(cliente.getCpf())) {
+            throw new ValidationException("Aviso: Digite um CPF válido!");
+        }
+
+        if (clienteRepository.existsByCpfAndIdNot(cliente.getCpf(), cliente.getId())) {
+            throw new ValidationException("Aviso: CPF já cadastrado!");
+        }
+
+        Optional<Cliente> clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
+        if (clienteExistente.isPresent() && clienteExistente.get().getId() == cliente.getId()) {
+            throw new ValidationException("Aviso: E-mail já cadastrado!");
+        }
     }
 }

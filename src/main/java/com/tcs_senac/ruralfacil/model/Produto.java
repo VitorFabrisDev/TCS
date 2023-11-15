@@ -22,10 +22,6 @@ public class Produto{
     private String descricao;
 
 
-    @Column(
-            name = "idCategoria"
-    )
-    private Categoria categoria;
 
     public long getId() {
         return id;
@@ -43,11 +39,5 @@ public class Produto{
         this.descricao = descricao;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }

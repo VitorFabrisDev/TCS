@@ -24,7 +24,6 @@ public class TesteController {
         Produto produto = new Produto();
         Categoria categoria = MUDAS_SEMENTES;
         produto.setDescricao("Semente Alface Americana");
-        produto.setCategoria(categoria);
         produto = produtoRepository.save(produto);
         produtoRepository.save(produto);
 

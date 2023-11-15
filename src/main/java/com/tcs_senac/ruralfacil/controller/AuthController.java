@@ -2,19 +2,15 @@ package com.tcs_senac.ruralfacil.controller;
 
 
 import java.util.List;
-import java.util.Set;
+
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-
-
+import org.apache.commons.validator.routines.EmailValidator;
 import com.tcs_senac.ruralfacil.config.security.jwt.JwtUtils;
 import com.tcs_senac.ruralfacil.config.security.services.UserDetailsImpl;
-import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.exception.TokenRefreshException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
-import com.tcs_senac.ruralfacil.model.Agricultor;
-import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.model.Enum.Roles;
 import com.tcs_senac.ruralfacil.model.RefreshToken;
 import com.tcs_senac.ruralfacil.payload.request.LoginRequest;
@@ -97,6 +93,12 @@ public class AuthController {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (!EmailValidator.getInstance().isValid(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Invalid email address!"));
         }
 
         Roles roles;
