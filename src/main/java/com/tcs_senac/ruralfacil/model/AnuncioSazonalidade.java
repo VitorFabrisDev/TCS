@@ -19,6 +19,15 @@ public class AnuncioSazonalidade extends EntityId {
     )
     private Sazonalidade sazonalidade;
 
+    public AnuncioSazonalidade() {
+        // Construtor padrão
+    }
+
+    public AnuncioSazonalidade(Anuncio anuncio, Sazonalidade sazonalidade) {
+        this.anuncio = anuncio;
+        this.sazonalidade = sazonalidade;
+    }
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

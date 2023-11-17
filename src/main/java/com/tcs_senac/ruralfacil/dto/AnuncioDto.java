@@ -1,10 +1,12 @@
 package com.tcs_senac.ruralfacil.dto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.Enum.Categoria;
+import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
 import com.tcs_senac.ruralfacil.model.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,7 +26,7 @@ public class AnuncioDto {
     private String foto4;
     private String foto5;
 
-    private List<AnuncioSazonalidadeDto> anunciosazonalidade;
+    private List<String> sazonalidades;
 
     public Produto getProduto() {
         return produto;
@@ -114,6 +116,14 @@ public class AnuncioDto {
         this.foto5 = foto5;
     }
 
+    public List<String> getSazonalidades() {
+        return sazonalidades;
+    }
+
+    public void setSazonalidades(List<String> sazonalidades) {
+        this.sazonalidades = sazonalidades;
+    }
+
     public AnuncioDto() {
     }
 
@@ -128,6 +138,8 @@ public class AnuncioDto {
         dto.setFoto3(anuncio.getFoto3());
         dto.setFoto4(anuncio.getFoto4());
         dto.setFoto5(anuncio.getFoto5());
+        // Adicione a linha abaixo para lidar com sazonalidades
+        dto.setSazonalidades(anuncio.getAnunciosazonalidade().stream().map(s -> s.getSazonalidade().name()).collect(Collectors.toList()));
         return dto;
     }
 
@@ -155,5 +167,12 @@ public class AnuncioDto {
         return new PageImpl<>(anunciosDTO, pageable, anuncios.getTotalElements());
     }
 
-
+    public List<AnuncioSazonalidadeDto> getAnunciosazonalidade() {
+        if (sazonalidades != null) {
+            return sazonalidades.stream()
+                    .map(s -> new AnuncioSazonalidadeDto(Sazonalidade.valueOf(s)))
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
 }

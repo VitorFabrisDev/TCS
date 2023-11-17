@@ -83,6 +83,7 @@ public class ClienteDto {
     public ClienteDto() {
     }
 
+
     public static ClienteDto fromEntity(Cliente cliente) {
         ClienteDto dto = new ClienteDto();
         dto.setCpf(cliente.getCpf());
@@ -90,6 +91,8 @@ public class ClienteDto {
         dto.setDataNascimento(cliente.getDataNascimento());
         dto.setEmail(cliente.getEmail());
         dto.setWhatsApp(cliente.getWhatsApp());
+        dto.setEndereco(cliente.getEndereco());
+        dto.setAcessoPessoa(cliente.getAcessoPessoa());
         return dto;
     }
 

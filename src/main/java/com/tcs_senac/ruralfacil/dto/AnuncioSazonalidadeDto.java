@@ -5,44 +5,30 @@ import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.AnuncioSazonalidade;
 import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
 
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AnuncioSazonalidadeDto {
 
-
-    private long anuncioId;
+    private Long anuncioId;
     private Sazonalidade sazonalidade;
 
-    // construtores, getters e setters
-
-    public static AnuncioSazonalidadeDto fromEntity(AnuncioSazonalidade anuncioSazonalidade) {
-        AnuncioSazonalidadeDto dto = new AnuncioSazonalidadeDto();
-        dto.setAnuncioId(anuncioSazonalidade.getAnuncio().getId());
-        dto.setSazonalidade(anuncioSazonalidade.getSazonalidade());
-        return dto;
+    public AnuncioSazonalidadeDto(Sazonalidade sazonalidade) {
+        this.sazonalidade = sazonalidade;
     }
 
-    public AnuncioSazonalidade toEntity(Anuncio anuncio) {
-        AnuncioSazonalidade anuncioSazonalidade = new AnuncioSazonalidade();
+    public AnuncioSazonalidadeDto() {
 
-        if (anuncio != null) {
-            anuncioSazonalidade.setAnuncio(anuncio);
-        } else {
-            throw new IllegalStateException("Anuncio não pode ser nulo.");
-        }
-
-        anuncioSazonalidade.setSazonalidade(this.getSazonalidade());
-        return anuncioSazonalidade;
     }
 
 
-    // getters e setters
 
-    public long getAnuncioId() {
+
+    public Long getAnuncioId() {
         return anuncioId;
     }
 
-    public void setAnuncioId(long anuncioId) {
+    public void setAnuncioId(Long anuncioId) {
         this.anuncioId = anuncioId;
     }
 
@@ -52,5 +38,21 @@ public class AnuncioSazonalidadeDto {
 
     public void setSazonalidade(Sazonalidade sazonalidade) {
         this.sazonalidade = sazonalidade;
+    }
+
+    public static AnuncioSazonalidadeDto fromEntity(AnuncioSazonalidade anuncioSazonalidade) {
+        AnuncioSazonalidadeDto dto = new AnuncioSazonalidadeDto();
+        dto.setSazonalidade(anuncioSazonalidade.getSazonalidade());
+        return dto;
+    }
+
+    public AnuncioSazonalidade toEntity(Anuncio anuncio) {
+        AnuncioSazonalidade anuncioSazonalidade = new AnuncioSazonalidade();
+        anuncioSazonalidade.setAnuncio(anuncio);
+        anuncioSazonalidade.setSazonalidade(this.getSazonalidade());
+        return anuncioSazonalidade;
+    }
+    public static List<AnuncioSazonalidadeDto> fromEntityList(List<AnuncioSazonalidade> sazonalidades) {
+        return sazonalidades.stream().map(AnuncioSazonalidadeDto::fromEntity).collect(Collectors.toList());
     }
 }

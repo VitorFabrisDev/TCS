@@ -3,7 +3,7 @@ package com.tcs_senac.ruralfacil.model;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class EntityId {
+public abstract class  EntityId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -57,6 +57,15 @@ public class ClienteController extends AbstractController {
     @PutMapping("/{id}")
     public Cliente atualizarCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto) {
         Cliente cliente = mapClienteDTOToEntity(clienteDto);
+        Endereco endereco = cliente.getEndereco();
+        if (endereco != null) {
+            enderecoService.atualizarEndereco(cliente.getEndereco().getId(),endereco);
+        }
+        AcessoPessoa acessoPessoa = cliente.getAcessoPessoa();
+        if(acessoPessoa != null){
+            acessoPessoaService.atualizarAcessoPessoa(cliente.getAcessoPessoa().getId(),acessoPessoa);
+        }
+
         return clienteService.atualizarCliente(id, cliente);
     }
 

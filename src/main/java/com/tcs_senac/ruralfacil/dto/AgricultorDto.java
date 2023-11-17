@@ -127,6 +127,8 @@ public class AgricultorDto {
         dto.setCaf(agricultor.getCaf());
         dto.setOrganico(agricultor.getOrganico());
         dto.setAtivo(agricultor.getAtivo());
+        dto.setEndereco(agricultor.getEndereco());
+        dto.setAcessoPessoa(agricultor.getAcessoPessoa());
         return dto;
     }
 

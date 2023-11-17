@@ -68,6 +68,9 @@ public class Anuncio {
     @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnuncioSazonalidade> anunciosazonalidade;
 
+    public Anuncio(Long anuncioId) {
+    }
+
     public long getId() {
         return id;
     }
@@ -101,6 +104,11 @@ public class Anuncio {
     public Anuncio(){
 
     }
+
+    public boolean isOrganico() {
+        return organico;
+    }
+
     public Produto getProduto() {
         return produto;
     }

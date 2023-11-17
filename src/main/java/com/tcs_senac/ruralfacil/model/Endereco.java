@@ -10,11 +10,6 @@ public class Endereco{
     )
     private long id;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "idCliente"
-    )
-    private Cliente cliente;
 
     @Column(
             name = "tipoEndereco"
@@ -55,6 +50,15 @@ public class Endereco{
             name = "inscricaoIncra"
     )
     private String inscricaoIncra;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
 
     public char getTipoEndereco() {

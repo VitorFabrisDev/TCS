@@ -3,7 +3,6 @@ package com.tcs_senac.ruralfacil.service;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.exception.ValidationException;
 import com.tcs_senac.ruralfacil.model.Agricultor;
-import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.repository.AgricultorRepository;
 import com.tcs_senac.ruralfacil.util.CpfValid;
 import com.tcs_senac.ruralfacil.util.InscricaoEstadualValid;

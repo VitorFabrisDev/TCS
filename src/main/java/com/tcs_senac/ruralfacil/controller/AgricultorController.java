@@ -1,6 +1,7 @@
 package com.tcs_senac.ruralfacil.controller;
 import com.tcs_senac.ruralfacil.dto.AgricultorDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
+import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.model.Endereco;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
@@ -45,8 +46,6 @@ public class AgricultorController extends AbstractController {
         return agricultorService.cadastrarAgricultor(agricultor);
     }
 
-
-
     @GetMapping
     //@PreAuthorize("hasRole('ADMIN')")
     public List<AgricultorDto> listarAgricultores() {
@@ -62,10 +61,21 @@ public class AgricultorController extends AbstractController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public AgricultorDto atualizarAgricultor(@PathVariable Long id, @RequestBody AgricultorDto agricultorDTO) throws NotFoundException {
-        Agricultor agricultor = agricultorService.atualizarAgricultor(id, agricultorDTO.toEntity());
-        return AgricultorDto.fromEntity(agricultor);
+    //@PreAuthorize("hasRole('ADMIN')")
+    public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody AgricultorDto agricultorDTO) throws NotFoundException {
+        Agricultor agricultor = mapAgricultorDTOToEntity(agricultorDTO);
+
+        Endereco endereco = agricultor.getEndereco();
+
+        if (endereco != null) {
+            enderecoService.atualizarEndereco(agricultor.getEndereco().getId(),endereco);
+        }
+        AcessoPessoa acessoPessoa = agricultor.getAcessoPessoa();
+        if(acessoPessoa != null){
+            acessoPessoaService.atualizarAcessoPessoa(agricultor.getAcessoPessoa().getId(),acessoPessoa);
+        }
+
+        return agricultorService.atualizarAgricultor(id, agricultor);
     }
 
     private Agricultor mapAgricultorDTOToEntity(AgricultorDto agricultorDTO) {
