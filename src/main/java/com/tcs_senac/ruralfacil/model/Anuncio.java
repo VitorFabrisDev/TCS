@@ -87,7 +87,7 @@ public class Anuncio {
         this.id = id;
     }
 
-    public Anuncio(Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5) {
+    public Anuncio(Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
         this.produto = produto;
         this.categoria = categoria;
         this.descricao = descricao;
@@ -99,6 +99,8 @@ public class Anuncio {
         this.foto3 = foto3;
         this.foto4 = foto4;
         this.foto5 = foto5;
+        this.anunciosazonalidade = anunciosazonalidade;
+
     }
 
     public Anuncio(){

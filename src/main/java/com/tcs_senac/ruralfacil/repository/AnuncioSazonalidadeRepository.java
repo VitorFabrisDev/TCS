@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnuncioSazonalidadeRepository extends JpaRepository<AnuncioSazonalidade, Long> {
-    void delete(Anuncio anuncioExistente);
+
+
 }

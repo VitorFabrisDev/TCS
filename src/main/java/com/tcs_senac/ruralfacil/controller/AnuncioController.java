@@ -66,7 +66,7 @@ public class AnuncioController extends AbstractController {
    // @PreAuthorize("hasRole('ADMIN')")
     public AnuncioDto atualizarAnuncio(@PathVariable Long id, @RequestBody AnuncioDto anuncioDTO) throws NotFoundException {
 
-        Anuncio anuncioExistente = obterAnuncioPorId(id).toEntity();
+        Anuncio anuncioExistente = anuncioService.obterAnuncioPorId(id);
 
         Anuncio anuncio = anuncioService.atualizarAnuncio(id, anuncioDTO.toEntity());
 

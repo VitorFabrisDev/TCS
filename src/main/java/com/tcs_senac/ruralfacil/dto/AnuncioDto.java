@@ -138,8 +138,7 @@ public class AnuncioDto {
         dto.setFoto3(anuncio.getFoto3());
         dto.setFoto4(anuncio.getFoto4());
         dto.setFoto5(anuncio.getFoto5());
-        // Adicione a linha abaixo para lidar com sazonalidades
-        dto.setSazonalidades(anuncio.getAnunciosazonalidade().stream().map(s -> s.getSazonalidade().name()).collect(Collectors.toList()));
+    //    dto.setSazonalidades(anuncio.getAnunciosazonalidade().stream().map(s -> s.getSazonalidade().name()).collect(Collectors.toList()));
         return dto;
     }
 

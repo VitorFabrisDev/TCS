@@ -46,7 +46,7 @@ public class AnuncioService {
         }
     }
 
-    @Transactional
+
     public void salvarSazonalidades(List<AnuncioSazonalidade> sazonalidades) {
         anuncioSazonalidadeRepository.saveAll(sazonalidades);
     }
@@ -77,6 +77,9 @@ public class AnuncioService {
     }
 
     public void excluirSazonalidadesDoAnuncio(Anuncio anuncioExistente) {
-        anuncioSazonalidadeRepository.delete(anuncioExistente);
+
+        List<AnuncioSazonalidade> sazonalidades = anuncioExistente.getAnunciosazonalidade();
+        anuncioSazonalidadeRepository.deleteAllInBatch(sazonalidades);
+
     }
 }

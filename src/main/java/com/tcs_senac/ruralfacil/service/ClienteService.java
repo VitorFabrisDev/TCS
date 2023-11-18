@@ -24,6 +24,7 @@ public class ClienteService {
 
     public Cliente cadastrarCliente(Cliente cliente) {
         validarCliente(cliente);
+        validarCpfExiste(cliente);
         return clienteRepository.save(cliente);
     }
 
@@ -61,13 +62,15 @@ public class ClienteService {
             throw new ValidationException("Aviso: Digite um CPF válido!");
         }
 
-        if (clienteRepository.existsByCpfAndIdNot(cliente.getCpf(), cliente.getId())) {
-            throw new ValidationException("Aviso: CPF já cadastrado!");
-        }
 
         Optional<Cliente> clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
         if (clienteExistente.isPresent() && clienteExistente.get().getId() == cliente.getId()) {
             throw new ValidationException("Aviso: E-mail já cadastrado!");
+        }
+    }
+    private void validarCpfExiste(Cliente cliente) throws ValidationException {
+        if (clienteRepository.existsByCpfAndIdNot(cliente.getCpf(), cliente.getId())) {
+            throw new ValidationException("Aviso: CPF já cadastrado!");
         }
     }
 }

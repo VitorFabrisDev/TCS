@@ -4,6 +4,7 @@ import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.repository.AcessoPessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.Optional;
 
 @Service
 public class AcessoPessoaService {
+
+    @Autowired
+    PasswordEncoder encoder;
 
     private final AcessoPessoaRepository acessoPessoaRepository;
 
@@ -51,9 +55,15 @@ public class AcessoPessoaService {
     public AcessoPessoa atualizarAcessoPessoa(Long id, AcessoPessoa acessoPessoaAtualizada) throws NotFoundException {
         AcessoPessoa acessoExistente = (AcessoPessoa) obterAcessoPessoaPorId(id);
         acessoExistente.setLogin(acessoPessoaAtualizada.getLogin());
-        acessoExistente.setPassword(acessoPessoaAtualizada.getPassword());
-        acessoExistente.setQtdAcesso(acessoPessoaAtualizada.getQtdAcesso());
-        acessoExistente.setDtUltAcesso(acessoPessoaAtualizada.getDtUltAcesso());
+        if (acessoPessoaAtualizada.getPassword() != null && !acessoPessoaAtualizada.getPassword().isEmpty()) {
+            acessoExistente.setPassword(encoder.encode(acessoPessoaAtualizada.getPassword()));
+        }
+        if (acessoPessoaAtualizada.getQtdAcesso() != 0) {
+            acessoExistente.setQtdAcesso(acessoPessoaAtualizada.getQtdAcesso());
+        }
+        if (acessoPessoaAtualizada.getDtUltAcesso() != null) {
+            acessoExistente.setDtUltAcesso(acessoPessoaAtualizada.getDtUltAcesso());
+        }
         return acessoPessoaRepository.save(acessoExistente);
     }
 

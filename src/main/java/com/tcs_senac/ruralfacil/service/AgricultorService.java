@@ -24,6 +24,8 @@ public class AgricultorService {
 
     public Agricultor cadastrarAgricultor(Agricultor agricultor) {
         validarAgricultor(agricultor);
+        validarAgricultorExistente(agricultor);
+
         return agricultorRepository.save(agricultor);
 
     }
@@ -64,13 +66,17 @@ public class AgricultorService {
         if (!InscricaoEstadualValid.validaIESantaCatarina(agricultor.getInscricaoEstadual())) {
             throw new ValidationException("Aviso: Digite uma IE válida");
         }
-        if (agricultorRepository.existsByCpfAndIdNot(agricultor.getCpf(), agricultor.getId())) {
-            throw new ValidationException("Aviso: CPF já cadastrado!");
-        }
+
 
         Optional<Agricultor> agricultorExistente = agricultorRepository.findByEmail(agricultor.getEmail());
         if (agricultorExistente.isPresent() && agricultorExistente.get().getId() == agricultor.getId()) {
             throw new ValidationException("Aviso: E-mail já cadastrado!");
+        }
+    }
+
+    private void validarAgricultorExistente(Agricultor agricultor) throws ValidationException {
+        if (agricultorRepository.existsByCpfAndIdNot(agricultor.getCpf(), agricultor.getId())) {
+            throw new ValidationException("Aviso: CPF já cadastrado!");
         }
     }
 

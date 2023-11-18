@@ -10,6 +10,7 @@ import com.tcs_senac.ruralfacil.service.AgricultorService;
 import com.tcs_senac.ruralfacil.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +29,7 @@ public class AgricultorController extends AbstractController {
 
     @Autowired
     private AcessoPessoaService acessoPessoaService;
+
 
     @PostMapping
     public Agricultor cadastrarAgricultor(@Valid @RequestBody AgricultorDto agricultorDTO) {
@@ -63,16 +65,22 @@ public class AgricultorController extends AbstractController {
     @PutMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public Agricultor atualizarAgricultor(@PathVariable Long id, @RequestBody AgricultorDto agricultorDTO) throws NotFoundException {
+
         Agricultor agricultor = mapAgricultorDTOToEntity(agricultorDTO);
 
         Endereco endereco = agricultor.getEndereco();
 
+        Agricultor agricultorExistente = agricultorService.obterAgricultorPorId(id);
+
+
         if (endereco != null) {
-            enderecoService.atualizarEndereco(agricultor.getEndereco().getId(),endereco);
+
+            enderecoService.atualizarEndereco(agricultorExistente.getEndereco().getId(),endereco);
         }
         AcessoPessoa acessoPessoa = agricultor.getAcessoPessoa();
         if(acessoPessoa != null){
-            acessoPessoaService.atualizarAcessoPessoa(agricultor.getAcessoPessoa().getId(),acessoPessoa);
+
+            acessoPessoaService.atualizarAcessoPessoa(agricultorExistente.getAcessoPessoa().getId(),acessoPessoa);
         }
 
         return agricultorService.atualizarAgricultor(id, agricultor);
