@@ -39,10 +39,8 @@ public class AnuncioService {
         try {
             return anuncioRepository.save(anuncio);
         } catch (DataIntegrityViolationException ex) {
-            // Trate a exceção de violação de restrição única
             String mensagemErro = "Não foi possível salvar o anúncio. só pode existir um anúncio com o mesmo produto e agricultor para pordutos orgânicos e não orgânicos.";
 
-            // Lança sua exceção personalizada
             throw new ValidationException(mensagemErro, ex);
         }
     }
@@ -97,8 +95,14 @@ public class AnuncioService {
         anuncioExistente.setFoto3(anuncioAtualizado.getFoto3());
         anuncioExistente.setFoto4(anuncioAtualizado.getFoto4());
         anuncioExistente.setFoto5(anuncioAtualizado.getFoto5());
-        return anuncioRepository.save(anuncioExistente);
 
+        try {
+            return anuncioRepository.save(anuncioExistente);
+        } catch (DataIntegrityViolationException ex) {
+            String mensagemErro = "Não foi possível salvar o anúncio. só pode existir um anúncio com o mesmo produto e agricultor para pordutos orgânicos e não orgânicos.";
+
+            throw new ValidationException(mensagemErro, ex);
+        }
     }
 
     public void excluirSazonalidadesDoAnuncio(Anuncio anuncioExistente) {
