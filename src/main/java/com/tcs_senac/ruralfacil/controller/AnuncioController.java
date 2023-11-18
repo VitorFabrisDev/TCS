@@ -4,6 +4,7 @@ import com.tcs_senac.ruralfacil.controller.AbstractController;
 import com.tcs_senac.ruralfacil.dto.AnuncioDto;
 import com.tcs_senac.ruralfacil.dto.AnuncioSazonalidadeDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
+import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.AnuncioSazonalidade;
 import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
@@ -27,14 +28,18 @@ public class AnuncioController extends AbstractController {
     @PostMapping
     public AnuncioDto cadastrarAnuncio(@Valid @RequestBody AnuncioDto anuncioDto) {
 
-        Anuncio anuncio = anuncioService.cadastrarAnuncio(anuncioDto.toEntity());
+        Anuncio anuncio = anuncioDto.toEntity();
 
         Produto produto = anuncioDto.getProduto();
         Produto produtoExistente = anuncioService.buscarProdutoPorDescricao(produto.getDescricao());
 
         if (produtoExistente == null) {
-            anuncioService.salvarProduto(produto);
+            produtoExistente = anuncioService.salvarProduto(produto);
         }
+
+        anuncio.setProduto(produtoExistente);
+
+        anuncioService.cadastrarAnuncio(anuncio);
 
         List<String> sazonalidades = anuncioDto.getSazonalidades();
         if (sazonalidades != null && !sazonalidades.isEmpty()) {

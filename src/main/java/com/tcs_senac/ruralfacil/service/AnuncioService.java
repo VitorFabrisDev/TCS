@@ -1,16 +1,19 @@
 package com.tcs_senac.ruralfacil.service;
 
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
+import com.tcs_senac.ruralfacil.exception.ValidationException;
+import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.AnuncioSazonalidade;
 import com.tcs_senac.ruralfacil.model.Produto;
+import com.tcs_senac.ruralfacil.repository.AgricultorRepository;
 import com.tcs_senac.ruralfacil.repository.AnuncioRepository;
 import com.tcs_senac.ruralfacil.repository.AnuncioSazonalidadeRepository;
 import com.tcs_senac.ruralfacil.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,17 +23,28 @@ public class AnuncioService {
     private final AnuncioRepository anuncioRepository;
     private final AnuncioSazonalidadeRepository anuncioSazonalidadeRepository;
 
+    private final AgricultorRepository agricultorRepository;
+
     private final ProdutoRepository produtoRepository;
 
     @Autowired
-    public AnuncioService(AnuncioRepository anuncioRepository, AnuncioSazonalidadeRepository anuncioSazonalidadeRepository, ProdutoRepository produtoRepository) {
+    public AnuncioService(AnuncioRepository anuncioRepository, AnuncioSazonalidadeRepository anuncioSazonalidadeRepository, ProdutoRepository produtoRepository, AgricultorRepository agricultorRepository) {
         this.anuncioRepository = anuncioRepository;
         this.anuncioSazonalidadeRepository = anuncioSazonalidadeRepository;
         this.produtoRepository = produtoRepository;
+        this.agricultorRepository = agricultorRepository;
     }
 
     public Anuncio cadastrarAnuncio(Anuncio anuncio) {
-        return anuncioRepository.save(anuncio);
+        try {
+            return anuncioRepository.save(anuncio);
+        } catch (DataIntegrityViolationException ex) {
+            // Trate a exceção de violação de restrição única
+            String mensagemErro = "Não foi possível salvar o anúncio. Já existe um anúncio com o mesmo produto e agricultor.";
+
+            // Lança sua exceção personalizada
+            throw new ValidationException(mensagemErro, ex);
+        }
     }
 
     public List<Anuncio> listarAnuncios() {
@@ -51,12 +65,22 @@ public class AnuncioService {
         anuncioSazonalidadeRepository.saveAll(sazonalidades);
     }
 
-    public void salvarProduto(Produto produto) {
-        produtoRepository.save(produto);
+    public Produto salvarProduto(Produto produto) {
+        return produtoRepository.save(produto);
+
     }
 
     public Produto buscarProdutoPorDescricao(String descricao) {
         return produtoRepository.findByDescricao(descricao);
+    }
+
+    public Agricultor buscarAgricultorPorId(Long id) {
+        Optional<Agricultor> agricultor = agricultorRepository.findById(id);
+      if(agricultor.isPresent()){
+          return agricultor.get();
+      }else{
+          throw new NotFoundException("Agricultor não encontrado");
+      }
     }
 
 
@@ -64,6 +88,7 @@ public class AnuncioService {
         Anuncio anuncioExistente = obterAnuncioPorId(id);
 
         anuncioExistente.setDescricao(anuncioAtualizado.getDescricao());
+        anuncioExistente.setCategoria(anuncioAtualizado.getCategoria());
         anuncioExistente.setOrganico(anuncioAtualizado.getOrganico());
         anuncioExistente.setClassificacao(anuncioAtualizado.getClassificacao());
         anuncioExistente.setValor(anuncioAtualizado.getValor());

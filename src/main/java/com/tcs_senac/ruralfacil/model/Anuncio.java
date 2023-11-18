@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "anuncio", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"idAgricultor", "idProduto"})
+})
 public class Anuncio {
 
     @Id
@@ -14,6 +17,9 @@ public class Anuncio {
     )
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "idAgricultor")
+    private Agricultor agricultor;
     @ManyToOne
     @JoinColumn(name = "idProduto")
     private Produto produto;
@@ -68,6 +74,8 @@ public class Anuncio {
     @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnuncioSazonalidade> anunciosazonalidade;
 
+
+
     public Anuncio(Long anuncioId) {
     }
 
@@ -87,7 +95,8 @@ public class Anuncio {
         this.id = id;
     }
 
-    public Anuncio(Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
+    public Anuncio(Agricultor agricultor,Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
+        this.agricultor = agricultor;
         this.produto = produto;
         this.categoria = categoria;
         this.descricao = descricao;
@@ -105,6 +114,14 @@ public class Anuncio {
 
     public Anuncio(){
 
+    }
+
+    public Agricultor getAgricultor() {
+        return agricultor;
+    }
+
+    public void setAgricultor(Agricultor agricultor) {
+        this.agricultor = agricultor;
     }
 
     public boolean isOrganico() {

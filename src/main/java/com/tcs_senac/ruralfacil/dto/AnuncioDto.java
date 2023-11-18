@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.Enum.Categoria;
 import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 
 public class AnuncioDto {
 
+
+    private Agricultor agricultor;
     private Produto produto;
     private Categoria categoria;
     private String descricao;
@@ -30,6 +33,18 @@ public class AnuncioDto {
 
     public Produto getProduto() {
         return produto;
+    }
+
+    public Agricultor getAgricultor() {
+        return agricultor;
+    }
+
+    public void setAgricultor(Agricultor agricultor) {
+        this.agricultor = agricultor;
+    }
+
+    public boolean isOrganico() {
+        return organico;
     }
 
     public void setProduto(Produto produto) {
@@ -127,8 +142,12 @@ public class AnuncioDto {
     public AnuncioDto() {
     }
 
+
     public static AnuncioDto fromEntity(Anuncio anuncio) {
         AnuncioDto dto = new AnuncioDto();
+        dto.setAgricultor(anuncio.getAgricultor());
+        dto.setProduto(anuncio.getProduto());
+        dto.setCategoria(anuncio.getCategoria());
         dto.setDescricao(anuncio.getDescricao());
         dto.setValor(anuncio.getValor());
         dto.setClassificacao(anuncio.getClassificacao());
@@ -138,12 +157,14 @@ public class AnuncioDto {
         dto.setFoto3(anuncio.getFoto3());
         dto.setFoto4(anuncio.getFoto4());
         dto.setFoto5(anuncio.getFoto5());
-    //    dto.setSazonalidades(anuncio.getAnunciosazonalidade().stream().map(s -> s.getSazonalidade().name()).collect(Collectors.toList()));
         return dto;
     }
 
     public Anuncio toEntity() {
         Anuncio anuncio = new Anuncio();
+        anuncio.setAgricultor(this.getAgricultor());
+        anuncio.setProduto(this.getProduto());
+        anuncio.setCategoria(this.getCategoria());
         anuncio.setDescricao(this.getDescricao());
         anuncio.setValor(this.getValor());
         anuncio.setClassificacao(this.getClassificacao());
@@ -153,7 +174,6 @@ public class AnuncioDto {
         anuncio.setFoto3(this.getFoto3());
         anuncio.setFoto4(this.getFoto4());
         anuncio.setFoto5(this.getFoto5());
-        // Configure outros campos, se aplicável
         return anuncio;
     }
 
