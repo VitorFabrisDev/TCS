@@ -40,7 +40,7 @@ public class AnuncioService {
             return anuncioRepository.save(anuncio);
         } catch (DataIntegrityViolationException ex) {
             // Trate a exceção de violação de restrição única
-            String mensagemErro = "Não foi possível salvar o anúncio. Já existe um anúncio com o mesmo produto e agricultor.";
+            String mensagemErro = "Não foi possível salvar o anúncio. só pode existir um anúncio com o mesmo produto e agricultor para pordutos orgânicos e não orgânicos.";
 
             // Lança sua exceção personalizada
             throw new ValidationException(mensagemErro, ex);

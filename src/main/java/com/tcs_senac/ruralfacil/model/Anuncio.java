@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "anuncio", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"idAgricultor", "idProduto"})
+        @UniqueConstraint(columnNames = {"idAgricultor", "idProduto", "organico"})
 })
 public class Anuncio {
 
