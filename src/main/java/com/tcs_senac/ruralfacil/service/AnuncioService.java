@@ -99,7 +99,7 @@ public class AnuncioService {
         try {
             return anuncioRepository.save(anuncioExistente);
         } catch (DataIntegrityViolationException ex) {
-            String mensagemErro = "Não foi possível salvar o anúncio. só pode existir um anúncio com o mesmo produto e agricultor para pordutos orgânicos e não orgânicos.";
+            String mensagemErro = "Não foi possível salvar o anúncio. Só pode existir um anúncio com o mesmo produto e agricultor para pordutos orgânicos e não orgânicos.";
 
             throw new ValidationException(mensagemErro, ex);
         }

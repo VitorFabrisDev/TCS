@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnuncioClienteClassificacaoRepository extends JpaRepository<AnuncioClienteClassificacao, Long> {
+    AnuncioClienteClassificacao findByAnuncioIdAndClienteId(long anuncioId, long clienteId);
 }

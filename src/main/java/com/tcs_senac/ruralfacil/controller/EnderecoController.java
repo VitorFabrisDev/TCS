@@ -30,21 +30,21 @@ public class EnderecoController extends AbstractController {
         return enderecoService.cadastrarEndereco(endereco);
     }
 
-    @ApiOperation(value = "Listar todos os endereços (requer papel de ADMIN)")
+    @ApiOperation(value = "Listar todos os endereços")
     @GetMapping
     //@PreAuthorize("hasRole('ADMIN')")
     public List<Endereco> listarEnderecos() {
         return enderecoService.listarEnderecos();
     }
 
-    @ApiOperation(value = "Obter um endereço por ID (requer papel de ADMIN)")
+    @ApiOperation(value = "Obter um endereço por ID")
     @GetMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public Endereco obterEnderecoPorId(@PathVariable(value = "id") Long id) throws NotFoundException {
         return enderecoService.obterEnderecoPorId(id);
     }
 
-    @ApiOperation(value = "Atualizar um endereço por ID (requer papel de ADMIN)")
+    @ApiOperation(value = "Atualizar um endereço por ID")
     @PutMapping("/{id}")
    // @PreAuthorize("hasRole('ADMIN')")
     public Endereco atualizarEndereco(@PathVariable(value ="id") Long id, @RequestBody EnderecoDto enderecoDto) throws NotFoundException {

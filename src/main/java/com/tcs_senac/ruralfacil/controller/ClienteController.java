@@ -7,12 +7,14 @@ import com.tcs_senac.ruralfacil.model.Endereco;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
 import com.tcs_senac.ruralfacil.service.ClienteService;
 import com.tcs_senac.ruralfacil.service.EnderecoService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Api(value = "Cliente API", tags = { "Cliente" })
 @RestController
 @RequestMapping("/api/cliente")
 public class ClienteController extends AbstractController {

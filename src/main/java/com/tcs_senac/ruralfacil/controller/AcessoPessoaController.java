@@ -5,6 +5,7 @@ import com.tcs_senac.ruralfacil.dto.AcessoPessoaDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Api(value = "AcessoPessoa API", tags = { "AcessoPessoa" })
 @RestController
 @RequestMapping("/api/acessopessoa")
 public class AcessoPessoaController extends AbstractController {

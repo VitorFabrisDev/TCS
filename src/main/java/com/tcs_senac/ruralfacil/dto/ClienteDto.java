@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class ClienteDto {
 
+    private long id;
     private AcessoPessoa acessoPessoa;
     private Endereco endereco;
     private String cpf;
@@ -22,7 +23,13 @@ public class ClienteDto {
     private String email;
     private String whatsApp;
 
-    // Adicione getters e setters
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -86,6 +93,7 @@ public class ClienteDto {
 
     public static ClienteDto fromEntity(Cliente cliente) {
         ClienteDto dto = new ClienteDto();
+        dto.setId(cliente.getId());
         dto.setCpf(cliente.getCpf());
         dto.setNome(cliente.getNome());
         dto.setDataNascimento(cliente.getDataNascimento());

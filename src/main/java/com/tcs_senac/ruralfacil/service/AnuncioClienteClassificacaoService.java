@@ -1,5 +1,6 @@
 package com.tcs_senac.ruralfacil.service;
 
+import com.tcs_senac.ruralfacil.dto.AnuncioClienteClassificacaoDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AnuncioClienteClassificacao;
 import com.tcs_senac.ruralfacil.repository.AnuncioClienteClassificacaoRepository;
@@ -23,9 +24,6 @@ public class AnuncioClienteClassificacaoService {
         return anuncioClienteClassificacaoRepository.save(anuncioClienteClassificacao);
     }
 
-    public List<AnuncioClienteClassificacao> listarAgricultores() {
-        return anuncioClienteClassificacaoRepository.findAll();
-    }
 
     public AnuncioClienteClassificacao obterAnuncioClienteClassificacaoPorId(Long id) throws NotFoundException {
         Optional<AnuncioClienteClassificacao> anuncioClienteClassificacao = anuncioClienteClassificacaoRepository.findById(id);
@@ -41,5 +39,9 @@ public class AnuncioClienteClassificacaoService {
         return null;
 
 
+    }
+
+    public AnuncioClienteClassificacao obterPorIdAnuncioIdCliente(long anuncioId, long clienteId) {
+        return anuncioClienteClassificacaoRepository.findByAnuncioIdAndClienteId(anuncioId, clienteId);
     }
 }

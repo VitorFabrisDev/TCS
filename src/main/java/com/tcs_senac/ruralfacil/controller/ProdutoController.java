@@ -29,36 +29,33 @@ public class ProdutoController extends AbstractController {
         return produtoService.cadastrarProduto(produto);
     }
 
-    @ApiOperation(value = "Listar todos os produtos (requer papel de ADMIN)")
+    @ApiOperation(value = "Listar todos os produtos")
     @GetMapping
     //@PreAuthorize("hasRole('ADMIN')")
     public List<Produto> listarProdutos() {
         return produtoService.listarProdutos();
     }
 
-    @ApiOperation(value = "Obter um produto por ID (requer papel de ADMIN)")
+    @ApiOperation(value = "Obter um produto por ID")
     @GetMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public Produto obterProdutoPorId(@PathVariable Long id) throws NotFoundException {
         return produtoService.obterProdutoPorId(id);
     }
 
-    @ApiOperation(value = "Atualizar um produto por ID (requer papel de ADMIN)")
+    @ApiOperation(value = "Atualizar um produto por ID ")
     @PutMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public Produto atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDto produtoDTO) throws NotFoundException {
-        // Mapeie o ProdutoDTO para a entidade Produto antes de chamar o serviço
         Produto produto = mapProdutoDTOToEntity(produtoDTO);
         return produtoService.atualizarProduto(id, produto);
     }
 
-    // Método para mapear um ProdutoDTO para a entidade Produto
     private Produto mapProdutoDTOToEntity(ProdutoDto produtoDTO) {
         Produto produto = new Produto();
-        // Realize o mapeamento dos campos do DTO para a entidade aqui
         produto.setDescricao(produtoDTO.getDescricao());
         produto.setDescricao(produtoDTO.getDescricao());
-        // Outros campos, se aplicável
+
         return produto;
     }
 }

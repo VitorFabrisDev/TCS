@@ -15,6 +15,15 @@ import org.springframework.data.domain.Pageable;
 
 public class AnuncioDto {
 
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     private Agricultor agricultor;
     private Produto produto;
@@ -145,6 +154,7 @@ public class AnuncioDto {
 
     public static AnuncioDto fromEntity(Anuncio anuncio) {
         AnuncioDto dto = new AnuncioDto();
+        dto.setId(anuncio.getId());
         dto.setAgricultor(anuncio.getAgricultor());
         dto.setProduto(anuncio.getProduto());
         dto.setCategoria(anuncio.getCategoria());
@@ -159,6 +169,7 @@ public class AnuncioDto {
         dto.setFoto5(anuncio.getFoto5());
         return dto;
     }
+
 
     public Anuncio toEntity() {
         Anuncio anuncio = new Anuncio();

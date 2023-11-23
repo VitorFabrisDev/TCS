@@ -1,23 +1,21 @@
 package com.tcs_senac.ruralfacil.controller;
 
-import com.tcs_senac.ruralfacil.controller.AbstractController;
 import com.tcs_senac.ruralfacil.dto.AnuncioDto;
-import com.tcs_senac.ruralfacil.dto.AnuncioSazonalidadeDto;
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
-import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.model.Anuncio;
 import com.tcs_senac.ruralfacil.model.AnuncioSazonalidade;
 import com.tcs_senac.ruralfacil.model.Enum.Sazonalidade;
 import com.tcs_senac.ruralfacil.model.Produto;
 import com.tcs_senac.ruralfacil.service.AnuncioService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Api(value = "Anuncio API", tags = { "Anuncio" })
 @RestController
 @RequestMapping("/api/anuncio")
 public class AnuncioController extends AbstractController {
