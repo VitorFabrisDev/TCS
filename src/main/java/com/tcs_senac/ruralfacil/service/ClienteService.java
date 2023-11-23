@@ -46,7 +46,6 @@ public class ClienteService {
         Cliente clienteExistente = obterClientePorId(id);
         clienteExistente.setCpf(clienteAtualizado.getCpf());
         clienteExistente.setNome(clienteAtualizado.getNome());
-        clienteExistente.setEmail(clienteAtualizado.getEmail());
         clienteExistente.setWhatsApp(clienteAtualizado.getWhatsApp());
         clienteExistente.setDataNascimento(clienteAtualizado.getDataNascimento());
         return clienteRepository.save(clienteExistente);
@@ -54,19 +53,11 @@ public class ClienteService {
     }
 
     private void validarCliente(Cliente cliente) throws ValidationException {
-        if (!EmailValidator.getInstance().isValid(cliente.getEmail())) {
-            throw new ValidationException("Aviso: Digite um endereço de e-mail válido!");
-        }
 
         if (!CpfValid.isValid(cliente.getCpf())) {
             throw new ValidationException("Aviso: Digite um CPF válido!");
         }
 
-
-        Optional<Cliente> clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
-        if (clienteExistente.isPresent() && clienteExistente.get().getId() == cliente.getId()) {
-            throw new ValidationException("Aviso: E-mail já cadastrado!");
-        }
     }
     private void validarCpfExiste(Cliente cliente) throws ValidationException {
         if (clienteRepository.existsByCpfAndIdNot(cliente.getCpf(), cliente.getId())) {

@@ -48,18 +48,14 @@ public class EnderecoController extends AbstractController {
     @PutMapping("/{id}")
    // @PreAuthorize("hasRole('ADMIN')")
     public Endereco atualizarEndereco(@PathVariable(value ="id") Long id, @RequestBody EnderecoDto enderecoDto) throws NotFoundException {
-        // Mapeie o EnderecoDTO para a entidade Endereco antes de chamar o serviço
         Endereco endereco = mapEnderecoDTOToEntity(enderecoDto);
         return enderecoService.atualizarEndereco(id, endereco);
     }
 
-    // Método para mapear um EnderecoDTO para a entidade Endereco
     private Endereco mapEnderecoDTOToEntity(EnderecoDto enderecoDto) {
         Endereco endereco = new Endereco();
-        // Realize o mapeamento dos campos do DTO para a entidade aqui
         endereco.setLogradouro(enderecoDto.getLogradouro());
         endereco.setMunicipio(enderecoDto.getMunicipio());
-        // Outros campos, se aplicável
         return endereco;
     }
 }

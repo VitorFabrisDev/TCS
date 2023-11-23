@@ -46,7 +46,6 @@ public class EnderecoService {
         enderecoExistente.setComplemento(enderecoAtualizado.getComplemento());
         enderecoExistente.setCep(enderecoAtualizado.getCep());
         enderecoExistente.setMunicipio(enderecoAtualizado.getMunicipio());
-        enderecoExistente.setTipoEndereco(enderecoAtualizado.getTipoEndereco());
         enderecoExistente.setInscricaoIncra(enderecoAtualizado.getInscricaoIncra());
         return enderecoRepository.save(enderecoExistente);
     }

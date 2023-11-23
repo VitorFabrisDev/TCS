@@ -9,8 +9,8 @@ import java.util.Date;
 @Entity
 public class Cliente extends Pessoa{
 
-    public Cliente(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp) {
-        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
+    public Cliente(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento,  String whatsApp) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, whatsApp);
     }
 
 

@@ -55,9 +55,6 @@ public class AgricultorService {
     }
 
     private void validarAgricultor(Agricultor agricultor) throws ValidationException {
-        if (!EmailValidator.getInstance().isValid(agricultor.getEmail())) {
-            throw new ValidationException("Aviso: Digite um endereço de e-mail válido!");
-        }
 
         if (!CpfValid.isValid(agricultor.getCpf())) {
             throw new ValidationException("Aviso: Digite uma CPF válido!");
@@ -68,10 +65,6 @@ public class AgricultorService {
         }
 
 
-        Optional<Agricultor> agricultorExistente = agricultorRepository.findByEmail(agricultor.getEmail());
-        if (agricultorExistente.isPresent() && agricultorExistente.get().getId() == agricultor.getId()) {
-            throw new ValidationException("Aviso: E-mail já cadastrado!");
-        }
     }
 
     private void validarAgricultorExistente(Agricultor agricultor) throws ValidationException {

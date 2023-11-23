@@ -18,7 +18,6 @@ public class AgricultorDto {
     private String cpf;
     private String nome;
     private LocalDateTime dataNascimento;
-    private String email;
     private String whatsApp;
     private String inscricaoEstadual;
     private String caf;
@@ -65,13 +64,6 @@ public class AgricultorDto {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getWhatsApp() {
         return whatsApp;
@@ -121,7 +113,6 @@ public class AgricultorDto {
         dto.setCpf(agricultor.getCpf());
         dto.setNome(agricultor.getNome());
         dto.setDataNascimento(agricultor.getDataNascimento());
-        dto.setEmail(agricultor.getEmail());
         dto.setWhatsApp(agricultor.getWhatsApp());
         dto.setInscricaoEstadual(agricultor.getInscricaoEstadual());
         dto.setCaf(agricultor.getCaf());
@@ -133,7 +124,7 @@ public class AgricultorDto {
     }
 
     public Agricultor toEntity() {
-        Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getEndereco(),this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp(), this.getInscricaoEstadual(), this.getCaf(), this.getOrganico(), this.getAtivo());
+        Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getEndereco(),this.getCpf(), this.getNome(), this.getDataNascimento(), this.getWhatsApp(), this.getInscricaoEstadual(), this.getCaf(), this.getOrganico(), this.getAtivo());
         agricultor.setInscricaoEstadual(this.getInscricaoEstadual());
         agricultor.setCaf(this.getCaf());
         agricultor.setOrganico(this.getOrganico());

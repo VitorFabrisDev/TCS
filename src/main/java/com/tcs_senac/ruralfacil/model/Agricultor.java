@@ -35,8 +35,8 @@ public class Agricultor extends Pessoa{
     private boolean ativo;
 
 
-    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp, long id, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
-        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
+    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String whatsApp, long id, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, whatsApp);
         this.id = id;
         this.inscricaoEstadual = inscricaoEstadual;
         this.caf = caf;
@@ -49,8 +49,8 @@ public class Agricultor extends Pessoa{
         super();
     }
 
-    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
-        super(acessoPessoa, endereco, cpf, nome, dataNascimento, email, whatsApp);
+    public Agricultor(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String whatsApp, String inscricaoEstadual, String caf, boolean organico, boolean ativo) {
+        super(acessoPessoa, endereco, cpf, nome, dataNascimento, whatsApp);
         this.inscricaoEstadual = inscricaoEstadual;
         this.caf = caf;
         this.ativo = ativo;

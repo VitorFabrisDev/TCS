@@ -10,12 +10,6 @@ public class Endereco{
     )
     private long id;
 
-
-    @Column(
-            name = "tipoEndereco"
-    )
-    private char tipoEndereco;
-
     @Column(
             name = "logradouro"
     )
@@ -61,13 +55,6 @@ public class Endereco{
 
 
 
-    public char getTipoEndereco() {
-        return tipoEndereco;
-    }
-
-    public void setTipoEndereco(char tipoEndereco) {
-        this.tipoEndereco = tipoEndereco;
-    }
 
     public String getLogradouro() {
         return logradouro;

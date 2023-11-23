@@ -97,7 +97,6 @@ public class ClienteDto {
         dto.setCpf(cliente.getCpf());
         dto.setNome(cliente.getNome());
         dto.setDataNascimento(cliente.getDataNascimento());
-        dto.setEmail(cliente.getEmail());
         dto.setWhatsApp(cliente.getWhatsApp());
         dto.setEndereco(cliente.getEndereco());
         dto.setAcessoPessoa(cliente.getAcessoPessoa());
@@ -105,7 +104,7 @@ public class ClienteDto {
     }
 
     public Cliente toEntity() {
-        Cliente cliente = new Cliente(this.getAcessoPessoa(),this.getEndereco() ,this.getCpf(), this.getNome(), this.getDataNascimento(), this.getEmail(), this.getWhatsApp());
+        Cliente cliente = new Cliente(this.getAcessoPessoa(),this.getEndereco() ,this.getCpf(), this.getNome(), this.getDataNascimento(),  this.getWhatsApp());
         // Configure outros campos, se aplicável
         return cliente;
     }

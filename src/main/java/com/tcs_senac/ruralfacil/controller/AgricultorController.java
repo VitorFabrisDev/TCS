@@ -89,7 +89,7 @@ public class AgricultorController extends AbstractController {
     }
 
     private Agricultor mapAgricultorDTOToEntity(AgricultorDto agricultorDTO) {
-        Agricultor agricultor = new Agricultor(agricultorDTO.getAcessoPessoa(), agricultorDTO.getEndereco(), agricultorDTO.getCpf(), agricultorDTO.getNome(), agricultorDTO.getDataNascimento(), agricultorDTO.getEmail(), agricultorDTO.getWhatsApp(), agricultorDTO.getInscricaoEstadual(), agricultorDTO.getCaf(), agricultorDTO.getOrganico(), agricultorDTO.getAtivo());
+        Agricultor agricultor = new Agricultor(agricultorDTO.getAcessoPessoa(), agricultorDTO.getEndereco(), agricultorDTO.getCpf(), agricultorDTO.getNome(), agricultorDTO.getDataNascimento(),  agricultorDTO.getWhatsApp(), agricultorDTO.getInscricaoEstadual(), agricultorDTO.getCaf(), agricultorDTO.getOrganico(), agricultorDTO.getAtivo());
         return agricultor;
     }
 }

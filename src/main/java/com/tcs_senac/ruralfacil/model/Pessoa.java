@@ -29,23 +29,18 @@ public abstract class Pessoa {
     )
     private LocalDateTime dataNascimento;
 
-    @Column(
-            name = "email"
-    )
-    private String email;
 
     @Column(
             name = "whatsApp"
     )
     private String whatsApp;
 
-    public Pessoa(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String email, String whatsApp) {
+    public Pessoa(AcessoPessoa acessoPessoa, Endereco endereco, String cpf, String nome, LocalDateTime dataNascimento, String whatsApp) {
         this.acessoPessoa = acessoPessoa;
         this.endereco = endereco;
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.email = email;
         this.whatsApp = whatsApp;
     }
 
@@ -94,13 +89,6 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getWhatsApp() {
         return whatsApp;

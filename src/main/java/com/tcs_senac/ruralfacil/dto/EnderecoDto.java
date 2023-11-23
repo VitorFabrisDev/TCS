@@ -5,8 +5,6 @@ package com.tcs_senac.ruralfacil.dto;
 
 public class EnderecoDto {
 
-    private char tipoEndereco;
-
 
     private String logradouro;
 
@@ -30,13 +28,6 @@ public class EnderecoDto {
 
     // Você pode adicionar getters e setters aqui
 
-    public char getTipoEndereco() {
-        return tipoEndereco;
-    }
-
-    public void setTipoEndereco(char tipoEndereco) {
-        this.tipoEndereco = tipoEndereco;
-    }
 
     public String getLogradouro() {
         return logradouro;
