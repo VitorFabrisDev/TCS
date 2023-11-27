@@ -57,10 +57,10 @@ public class AgricultorController extends AbstractController {
         return agricultores.stream().map(AgricultorDto::fromEntity).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idacessopessoa}")
    // @PreAuthorize("hasRole('ADMIN')")
-    public AgricultorDto obterAgricultorPorId(@PathVariable Long id) throws NotFoundException {
-        Agricultor agricultor = agricultorService.obterAgricultorPorId(id);
+    public AgricultorDto obterAgricultorPorAcessoPessoa(@PathVariable Long idacessopessoa) throws NotFoundException {
+        Agricultor agricultor = agricultorService.obterAgricultorPorAcessoPessoa(idacessopessoa);
         return AgricultorDto.fromEntity(agricultor);
     }
 

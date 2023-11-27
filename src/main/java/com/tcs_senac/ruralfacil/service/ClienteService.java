@@ -2,7 +2,9 @@ package com.tcs_senac.ruralfacil.service;
 
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.exception.ValidationException;
+import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Cliente;
+import com.tcs_senac.ruralfacil.repository.AcessoPessoaRepository;
 import com.tcs_senac.ruralfacil.repository.ClienteRepository;
 import com.tcs_senac.ruralfacil.util.CpfValid;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -16,10 +18,13 @@ import java.util.Optional;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final AcessoPessoaRepository acessoPessoaRepository;
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, AcessoPessoaRepository acessoPessoaRepository) {
+
         this.clienteRepository = clienteRepository;
+        this.acessoPessoaRepository = acessoPessoaRepository;
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
@@ -62,6 +67,18 @@ public class ClienteService {
     private void validarCpfExiste(Cliente cliente) throws ValidationException {
         if (clienteRepository.existsByCpfAndIdNot(cliente.getCpf(), cliente.getId())) {
             throw new ValidationException("Aviso: CPF já cadastrado!");
+        }
+    }
+
+
+
+    public Cliente obterClientePorAcessoPessoa(Long idacessopessoa) {
+        Optional<AcessoPessoa> acessoPessoa = acessoPessoaRepository.findById(idacessopessoa);
+        Optional<Cliente> cliente = clienteRepository.findClienteByAcessoPessoa(acessoPessoa);
+        if (cliente.isPresent()) {
+            return cliente.get();
+        } else {
+            throw new NotFoundException("Cliente não encontrado");
         }
     }
 }

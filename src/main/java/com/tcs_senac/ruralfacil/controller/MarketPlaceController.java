@@ -150,8 +150,6 @@ public class MarketPlaceController {
                     AnuncioDto anuncioDto = AnuncioDto.fromEntity(tuple.get(QAnuncio.anuncio));
                     anuncioDto.setAgricultor(tuple.get(QAgricultor.agricultor));
                     anuncioDto.setProduto(tuple.get(QProduto.produto));
-
-                    // Correção aqui
                     anuncioDto.setSazonalidades(tuple.get(QAnuncio.anuncio).getAnunciosazonalidade()
                             .stream()
                             .map(anuncioSazonalidade -> anuncioSazonalidade.getSazonalidade().name())

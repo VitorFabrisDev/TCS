@@ -1,7 +1,10 @@
 package com.tcs_senac.ruralfacil.controller;
 
+import com.tcs_senac.ruralfacil.dto.AgricultorDto;
 import com.tcs_senac.ruralfacil.dto.ClienteDto;
+import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
+import com.tcs_senac.ruralfacil.model.Agricultor;
 import com.tcs_senac.ruralfacil.model.Cliente;
 import com.tcs_senac.ruralfacil.model.Endereco;
 import com.tcs_senac.ruralfacil.service.AcessoPessoaService;
@@ -54,6 +57,12 @@ public class ClienteController extends AbstractController {
     @GetMapping("/{id}")
     public Cliente obterClientePorId(@PathVariable Long id) {
         return clienteService.obterClientePorId(id);
+    }
+
+    @GetMapping("/{idacessopessoa}")
+        public ClienteDto obterClientePorAcessoPessoa(@PathVariable Long idacessopessoa) throws NotFoundException {
+            Cliente cliente = clienteService.obterClientePorAcessoPessoa(idacessopessoa);
+            return ClienteDto.fromEntity(cliente);
     }
 
     @PutMapping("/{id}")

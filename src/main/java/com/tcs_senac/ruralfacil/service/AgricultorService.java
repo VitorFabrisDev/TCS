@@ -2,7 +2,9 @@ package com.tcs_senac.ruralfacil.service;
 
 import com.tcs_senac.ruralfacil.exception.NotFoundException;
 import com.tcs_senac.ruralfacil.exception.ValidationException;
+import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Agricultor;
+import com.tcs_senac.ruralfacil.repository.AcessoPessoaRepository;
 import com.tcs_senac.ruralfacil.repository.AgricultorRepository;
 import com.tcs_senac.ruralfacil.util.CpfValid;
 import com.tcs_senac.ruralfacil.util.InscricaoEstadualValid;
@@ -15,11 +17,13 @@ import java.util.Optional;
 @Service
 public class AgricultorService {
     private final AgricultorRepository agricultorRepository;
+    private final AcessoPessoaRepository acessoPessoaRepository;
 
     @Autowired
-    public AgricultorService(AgricultorRepository agricultorRepository) {
+    public AgricultorService(AgricultorRepository agricultorRepository, AcessoPessoaRepository acessoPessoaRepository) {
 
         this.agricultorRepository = agricultorRepository;
+        this.acessoPessoaRepository = acessoPessoaRepository;
     }
 
     public Agricultor cadastrarAgricultor(Agricultor agricultor) {
@@ -74,4 +78,14 @@ public class AgricultorService {
     }
 
 
+    public Agricultor obterAgricultorPorAcessoPessoa(Long idAcessoPessoa) throws NotFoundException {
+        Optional<AcessoPessoa> acessoPessoa = acessoPessoaRepository.findById(idAcessoPessoa);
+
+        Optional<Agricultor> agricultor = agricultorRepository.findAgricultorByAcessoPessoa(acessoPessoa);
+        if (agricultor.isPresent()) {
+            return agricultor.get();
+        } else {
+            throw new NotFoundException("Agricultor não encontrado");
+        }
+    }
 }
