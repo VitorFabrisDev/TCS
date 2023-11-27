@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lista de Anúncios</title>
+</head>
+<body>
+
+<h1>Lista de Anúncios</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Agricultor</th>
+        <th>Categoria</th>
+        <th>Sazonalidade</th>
+        <th>Produto</th>
+        <th>Orgânico</th>
+        <th>Valor</th>
+        <th>Relevância</th>
+        <th>Foto1</th>
+        <th>Foto2</th>
+        <th>Foto3</th>
+        <th>Foto4</th>
+        <th>Foto5</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop sobre os anúncios e exibição dos resultados -->
+    <th:block th:each="anuncio : ${anuncios}">
+        <tr>
+            <td th:text="${anuncio.agricultor.nome}"></td>
+            <td th:text="${anuncio.categoria}"></td>
+            <td th:text="${anuncio.anunciosazonalidade[0].sazonalidade}"></td>
+            <td th:text="${anuncio.produto.descricao}"></td>
+            <td th:text="${anuncio.organico}"></td>
+            <td th:text="${anuncio.valor}"></td>
+            <td th:text="${anuncio.classificacao}"></td>
+            <td th:text="${anuncio.foto1}"></td>
+            <td th:text="${anuncio.foto2}"></td>
+            <td th:text="${anuncio.foto3}"></td>
+            <td th:text="${anuncio.foto4}"></td>
+            <td th:text="${anuncio.foto5}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+</body>
+</html>

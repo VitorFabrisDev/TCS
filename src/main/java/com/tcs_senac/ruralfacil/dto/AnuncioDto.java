@@ -30,7 +30,7 @@ public class AnuncioDto {
     private Categoria categoria;
     private String descricao;
     private Double valor;
-    private String classificacao;
+    private Double classificacao;
     private boolean organico;
     private String foto1;
     private String foto2;
@@ -84,11 +84,11 @@ public class AnuncioDto {
         this.valor = valor;
     }
 
-    public String getClassificacao() {
+    public Double getClassificacao() {
         return classificacao;
     }
 
-    public void setClassificacao(String classificacao) {
+    public void setClassificacao(Double classificacao) {
         this.classificacao = classificacao;
     }
 
@@ -205,4 +205,5 @@ public class AnuncioDto {
         }
         return Collections.emptyList();
     }
+
 }

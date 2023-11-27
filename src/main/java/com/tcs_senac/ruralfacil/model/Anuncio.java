@@ -1,10 +1,12 @@
 package com.tcs_senac.ruralfacil.model;
 
+import com.querydsl.core.annotations.QueryEntity;
 import com.tcs_senac.ruralfacil.model.Enum.Categoria;
 
 import javax.persistence.*;
 import java.util.List;
 
+@QueryEntity
 @Entity
 @Table(name = "anuncio", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"idAgricultor", "idProduto", "organico"})
@@ -40,7 +42,7 @@ public class Anuncio {
     @Column(
             name = "classificacao"
     )
-    private String classificacao;
+    private Double classificacao;
 
     @Column(
             name = "organico"
@@ -74,7 +76,17 @@ public class Anuncio {
     @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnuncioSazonalidade> anunciosazonalidade;
 
+    @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnuncioClienteClassificacao> anuncioClienteClassificacoes;
 
+
+    public List<AnuncioClienteClassificacao> getAnuncioClienteClassificacoes() {
+        return anuncioClienteClassificacoes;
+    }
+
+    public void setAnuncioClienteClassificacoes(List<AnuncioClienteClassificacao> anuncioClienteClassificacoes) {
+        this.anuncioClienteClassificacoes = anuncioClienteClassificacoes;
+    }
 
     public Anuncio(Long anuncioId) {
     }
@@ -95,7 +107,7 @@ public class Anuncio {
         this.id = id;
     }
 
-    public Anuncio(Agricultor agricultor,Produto produto,Categoria categoria, String descricao, Double valor, String classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
+    public Anuncio(Agricultor agricultor,Produto produto,Categoria categoria, String descricao, Double valor, Double classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
         this.agricultor = agricultor;
         this.produto = produto;
         this.categoria = categoria;
@@ -160,11 +172,11 @@ public class Anuncio {
         this.valor = valor;
     }
 
-    public String getClassificacao() {
+    public Double getClassificacao() {
         return classificacao;
     }
 
-    public void setClassificacao(String classificacao) {
+    public void setClassificacao(Double classificacao) {
         this.classificacao = classificacao;
     }
 

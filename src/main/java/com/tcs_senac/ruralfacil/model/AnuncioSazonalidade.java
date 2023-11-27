@@ -15,7 +15,7 @@ public class AnuncioSazonalidade extends EntityId {
     )
     private Anuncio anuncio;
     @Column(
-            name = "Sazonalidade"
+            name = "sazonalidade"
     )
     private Sazonalidade sazonalidade;
 
