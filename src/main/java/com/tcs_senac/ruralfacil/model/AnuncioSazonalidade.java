@@ -56,4 +56,5 @@ public class AnuncioSazonalidade extends EntityId {
     public void setSazonalidade(Sazonalidade sazonalidade) {
         this.sazonalidade = sazonalidade;
     }
+
 }

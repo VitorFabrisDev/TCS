@@ -78,11 +78,11 @@ public class MarketPlaceController {
                                             String produto, String produtofilter, String valor, String relevancia) {
         List<OrderSpecifier<?>> orderSpecifiers = new ArrayList<>();
         JPAQuery<Tuple> query = new JPAQuery<>(entityManager);
-        query.select(QAnuncio.anuncio, QProduto.produto, QAgricultor.agricultor, QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade)
+        query.select(QAnuncio.anuncio, QProduto.produto, QAgricultor.agricultor, QAnuncioSazonalidade.anuncioSazonalidade)
                 .from(QAnuncio.anuncio)
                 .innerJoin(QAgricultor.agricultor).on(QAnuncio.anuncio.agricultor.eq(QAgricultor.agricultor))
                 .innerJoin(QProduto.produto).on(QAnuncio.anuncio.produto.eq(QProduto.produto))
-                .innerJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().eq(QAnuncioSazonalidade.anuncioSazonalidade))
+                .innerJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade))
                 .leftJoin(QAnuncioClienteClassificacao.anuncioClienteClassificacao).on(QAnuncio.anuncio.anuncioClienteClassificacoes.any().eq(QAnuncioClienteClassificacao.anuncioClienteClassificacao))
                 .where(Expressions.booleanTemplate("1=1"));
 
@@ -116,7 +116,7 @@ public class MarketPlaceController {
             }
 
             if (sazonalidade != null) {
-                query.where(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(Sazonalidade.valueOf(sazonalidade)));
+                query.where(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.in(Sazonalidade.valueOf(sazonalidade)));
             }
 
             if (organico != null) {
@@ -150,7 +150,13 @@ public class MarketPlaceController {
                     AnuncioDto anuncioDto = AnuncioDto.fromEntity(tuple.get(QAnuncio.anuncio));
                     anuncioDto.setAgricultor(tuple.get(QAgricultor.agricultor));
                     anuncioDto.setProduto(tuple.get(QProduto.produto));
-                    anuncioDto.setSazonalidades(Collections.singletonList(tuple.get(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade).name()));
+
+                    // Correção aqui
+                    anuncioDto.setSazonalidades(tuple.get(QAnuncio.anuncio).getAnunciosazonalidade()
+                            .stream()
+                            .map(anuncioSazonalidade -> anuncioSazonalidade.getSazonalidade().name())
+                            .collect(Collectors.toList()));
+
                     return anuncioDto;
                 })
                 .collect(Collectors.toMap(

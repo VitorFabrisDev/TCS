@@ -5,6 +5,7 @@ import com.tcs_senac.ruralfacil.model.Enum.Categoria;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @QueryEntity
 @Entity
@@ -128,6 +129,7 @@ public class Anuncio {
 
     }
 
+
     public Agricultor getAgricultor() {
         return agricultor;
     }
@@ -226,5 +228,11 @@ public class Anuncio {
 
     public void setFoto5(String foto5) {
         this.foto5 = foto5;
+    }
+
+    public List<String> getNomesSazonalidades() {
+        return anunciosazonalidade.stream()
+                .map(anuncioSazonalidade -> anuncioSazonalidade.getSazonalidade().name())
+                .collect(Collectors.toList());
     }
 }
