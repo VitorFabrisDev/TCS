@@ -54,10 +54,6 @@ public class ClienteController extends AbstractController {
         return clienteService.listarClientes();
     }
 
-    @GetMapping("/{id}")
-    public Cliente obterClientePorId(@PathVariable Long id) {
-        return clienteService.obterClientePorId(id);
-    }
 
     @GetMapping("/{idacessopessoa}")
         public ClienteDto obterClientePorAcessoPessoa(@PathVariable Long idacessopessoa) throws NotFoundException {
