@@ -154,12 +154,12 @@ public class MarketPlaceController {
                     return anuncioDto;
                 })
                 .collect(Collectors.toMap(
-                        AnuncioDto::getId, // Chave do mapa: supondo que você tenha um método getId() em AnuncioDto
-                        anuncioDto -> anuncioDto, // Valor do mapa: o próprio objeto AnuncioDto
-                        (existing, replacement) -> existing, // Se houver chaves duplicadas, mantenha a primeira ocorrência
-                        LinkedHashMap::new // Usar um LinkedHashMap para manter a ordem de inserção
+                        AnuncioDto::getId,
+                        anuncioDto -> anuncioDto,
+                        (existing, replacement) -> existing,
+                        LinkedHashMap::new
                 ))
-                .values() // Pegar apenas os valores do mapa, que agora são AnuncioDto únicos
+                .values()
                 .stream()
                 .collect(Collectors.toList());
 
