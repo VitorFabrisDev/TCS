@@ -12,7 +12,7 @@ public class ProdutoDto {
 
     private Long id;
     //private String nome;
-    private String descricao;
+    private String nomeProduto;
 
     public Long getId() {
         return id;
@@ -22,26 +22,26 @@ public class ProdutoDto {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNomeProduto(String descricao) {
+        this.nomeProduto = nomeProduto;
     }
 
 
     public static ProdutoDto fromEntity(Produto produto) {
         ProdutoDto dto = new ProdutoDto();
         dto.setId(produto.getId());
-        dto.setDescricao(produto.getDescricao());
+        dto.setNomeProduto(produto.getNomeProduto());
         return dto;
     }
 
     public Produto toEntity() {
         Produto produto = new Produto();
         produto.setId(this.getId());
-        produto.setDescricao(this.getDescricao());
+        produto.setNomeProduto(this.getNomeProduto());
         return produto;
     }
 

@@ -38,7 +38,7 @@ public class ProdutoService {
 
     public Produto atualizarProduto(Long id, Produto produtoAtualizado) throws NotFoundException {
         Produto produtoExistente = obterProdutoPorId(id);
-        produtoExistente.setDescricao(produtoAtualizado.getDescricao());
+        produtoExistente.setNomeProduto(produtoAtualizado.getNomeProduto());
 
         return produtoRepository.save(produtoExistente);
 

@@ -68,8 +68,8 @@ public class AnuncioService {
 
     }
 
-    public Produto buscarProdutoPorDescricao(String descricao) {
-        return produtoRepository.findByDescricao(descricao);
+    public Produto buscarProdutoPorDescricao(String nomeProduto) {
+        return produtoRepository.findByNomeProduto(nomeProduto);
     }
 
     public Agricultor buscarAgricultorPorId(Long id) {

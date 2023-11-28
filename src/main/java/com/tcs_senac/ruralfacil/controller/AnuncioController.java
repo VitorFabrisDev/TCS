@@ -29,7 +29,7 @@ public class AnuncioController extends AbstractController {
         Anuncio anuncio = anuncioDto.toEntity();
 
         Produto produto = anuncioDto.getProduto();
-        Produto produtoExistente = anuncioService.buscarProdutoPorDescricao(produto.getDescricao());
+        Produto produtoExistente = anuncioService.buscarProdutoPorDescricao(produto.getNomeProduto());
 
         if (produtoExistente == null) {
             produtoExistente = anuncioService.salvarProduto(produto);

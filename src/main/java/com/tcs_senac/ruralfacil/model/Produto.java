@@ -17,9 +17,9 @@ public class Produto{
 
 
     @Column(
-            name = "descricao"
+            name = "nomeProduto"
     )
-    private String descricao;
+    private String nomeProduto;
 
 
 
@@ -31,12 +31,12 @@ public class Produto{
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
 

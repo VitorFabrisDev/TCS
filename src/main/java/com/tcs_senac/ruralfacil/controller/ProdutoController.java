@@ -53,8 +53,8 @@ public class ProdutoController extends AbstractController {
 
     private Produto mapProdutoDTOToEntity(ProdutoDto produtoDTO) {
         Produto produto = new Produto();
-        produto.setDescricao(produtoDTO.getDescricao());
-        produto.setDescricao(produtoDTO.getDescricao());
+        produto.setNomeProduto(produtoDTO.getNomeProduto());
+        produto.setNomeProduto(produtoDTO.getNomeProduto());
 
         return produto;
     }

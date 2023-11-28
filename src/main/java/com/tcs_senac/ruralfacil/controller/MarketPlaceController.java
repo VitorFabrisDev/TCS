@@ -125,11 +125,11 @@ public class MarketPlaceController {
             }
 
             if (produtofilter != null) {
-                query.where(QAnuncio.anuncio.produto.descricao.contains(produtofilter));
+                query.where(QAnuncio.anuncio.produto.nomeProduto.contains(produtofilter));
             }
 
             if (produto != null) {
-                orderSpecifiers.add(produto.equalsIgnoreCase("asc") ? QAnuncio.anuncio.produto.descricao.asc() : QAnuncio.anuncio.produto.descricao.desc());
+                orderSpecifiers.add(produto.equalsIgnoreCase("asc") ? QAnuncio.anuncio.produto.nomeProduto.asc() : QAnuncio.anuncio.produto.nomeProduto.desc());
             }
 
             if (valor != null) {

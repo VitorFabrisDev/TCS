@@ -23,7 +23,7 @@ public class TesteController {
     public String teste() {
         Produto produto = new Produto();
         Categoria categoria = MUDAS_SEMENTES;
-        produto.setDescricao("Semente Alface Americana");
+        produto.setNomeProduto("Semente Alface Americana");
         produto = produtoRepository.save(produto);
         produtoRepository.save(produto);
 
