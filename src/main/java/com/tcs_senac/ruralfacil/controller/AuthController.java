@@ -1,8 +1,11 @@
 package com.tcs_senac.ruralfacil.controller;
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -78,6 +81,26 @@ public class AuthController {
 
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
+        Optional<AcessoPessoa> acessoPessoaExistente = acessoPessoaRepository.findByLogin(loginRequest.getUsername());
+        if (acessoPessoaExistente.isPresent()) {
+            AcessoPessoa acessoPessoa = acessoPessoaExistente.get();
+
+            Long qntAcessoAtual = acessoPessoa.getQtdAcesso();
+
+            acessoPessoa.setQtdAcesso(qntAcessoAtual + 1);
+            acessoPessoa.setDtUltAcesso(new Date());
+
+            acessoPessoaRepository.save(acessoPessoa);
+        } else {
+            return ResponseEntity.status(400).body("Usuário não encontrado");
+        }
+
+
+
+
+
+
+
         return ResponseEntity.ok(new JwtResponse(
                 jwt,
                 refreshToken.getToken(),
@@ -92,7 +115,7 @@ public class AuthController {
         if (acessoPessoaRepository.existsByLogin(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Error: Usuário já existente!"));
         }
 
         if (!EmailValidator.getInstance().isValid(signUpRequest.getUsername())) {
@@ -104,11 +127,11 @@ public class AuthController {
         Roles roles;
 
         String selectedRole = signUpRequest.getRole().toString();
-        if ("CLIENTE".equals(selectedRole)) {
+        if ("ROLE_CLIENTE".equals(selectedRole)) {
             roles = Roles.ROLE_CLIENTE;
-        } else if ("AGRICULTOR".equals(selectedRole)) {
+        } else if ("ROLE_AGRICULTOR".equals(selectedRole)) {
             roles = Roles.ROLE_AGRICULTOR;
-        } else if ("ADMINISTRADOR".equals(selectedRole)) {
+        } else if ("ROLE_ADMIN".equals(selectedRole)) {
             roles = Roles.ROLE_ADMIN;
         } else {
             roles = Roles.ROLE_CLIENTE;

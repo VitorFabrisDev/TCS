@@ -13,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 
 public class AcessoPessoaDto {
 
-    private ClienteDto cliente;
-    private AgricultorDto agricultor;
     private String login;
     private String password;
     private long qtdAcesso;
@@ -55,21 +53,6 @@ public class AcessoPessoaDto {
     }
 
     // Adicione getters e setters para os campos da classe AcessoPessoaDTO
-    public ClienteDto getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(ClienteDto cliente) {
-        this.cliente = cliente;
-    }
-
-    public AgricultorDto getAgricultor() {
-        return agricultor;
-    }
-
-    public void setAgricultor(AgricultorDto agricultor) {
-        this.agricultor = agricultor;
-    }
 
     public String getLogin() {
         return login;
@@ -116,9 +99,7 @@ public class AcessoPessoaDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AcessoPessoaDto that = (AcessoPessoaDto) o;
-        return Objects.equals(cliente, that.cliente) &&
-                Objects.equals(agricultor, that.agricultor) &&
-                Objects.equals(login, that.login) &&
+        return  Objects.equals(login, that.login) &&
                 Objects.equals(password, that.password) &&
                 qtdAcesso == that.qtdAcesso &&
                 Objects.equals(dtUltAcesso, that.dtUltAcesso) &&
@@ -127,6 +108,6 @@ public class AcessoPessoaDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cliente, agricultor, login, password, qtdAcesso, dtUltAcesso, admin);
+        return Objects.hash(login, password, qtdAcesso, dtUltAcesso, admin);
     }
 }
