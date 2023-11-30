@@ -2,6 +2,7 @@ package com.tcs_senac.ruralfacil.controller;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -88,16 +89,12 @@ public class AuthController {
             Long qntAcessoAtual = acessoPessoa.getQtdAcesso();
 
             acessoPessoa.setQtdAcesso(qntAcessoAtual + 1);
-            acessoPessoa.setDtUltAcesso(new Date());
+            acessoPessoa.setDtUltAcesso(LocalDateTime.now());
 
             acessoPessoaRepository.save(acessoPessoa);
         } else {
             return ResponseEntity.status(400).body("Usuário não encontrado");
         }
-
-
-
-
 
 
 
@@ -124,18 +121,25 @@ public class AuthController {
                     .body(new MessageResponse("Error: Invalid email address!"));
         }
 
-        Roles roles;
+        Roles roles = Roles.ROLE_CLIENTE;
 
         String selectedRole = signUpRequest.getRole().toString();
-        if ("ROLE_CLIENTE".equals(selectedRole)) {
-            roles = Roles.ROLE_CLIENTE;
-        } else if ("ROLE_AGRICULTOR".equals(selectedRole)) {
-            roles = Roles.ROLE_AGRICULTOR;
-        } else if ("ROLE_ADMIN".equals(selectedRole)) {
-            roles = Roles.ROLE_ADMIN;
-        } else {
-            roles = Roles.ROLE_CLIENTE;
+
+
+        switch (selectedRole) {
+            case "[ROLE_AGRICULTOR]":
+                roles = Roles.ROLE_AGRICULTOR;
+                break;
+            case "[ROLE_CLIENTE]":
+                roles = Roles.ROLE_CLIENTE;
+                break;
+            case "[ROLE_ADMIN]":
+                roles = Roles.ROLE_ADMIN;
+                break;
+            default:
+                roles = Roles.ROLE_CLIENTE;
         }
+
         AcessoPessoa acessoPessoa = new AcessoPessoa(
                 signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()),

@@ -2,7 +2,8 @@ package com.tcs_senac.ruralfacil.dto;
 
 import com.tcs_senac.ruralfacil.model.AcessoPessoa;
 import com.tcs_senac.ruralfacil.model.Enum.Roles;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class AcessoPessoaDto {
     private String login;
     private String password;
     private long qtdAcesso;
-    private Date dtUltAcesso;
+    private LocalDateTime dtUltAcesso;
     private Roles admin;
 
     public AcessoPessoaDto() {
@@ -78,11 +79,11 @@ public class AcessoPessoaDto {
         this.qtdAcesso = qtdAcesso;
     }
 
-    public Date getDtUltAcesso() {
+    public LocalDateTime getDtUltAcesso() {
         return dtUltAcesso;
     }
 
-    public void setDtUltAcesso(Date dtUltAcesso) {
+    public void setDtUltAcesso(LocalDateTime dtUltAcesso) {
         this.dtUltAcesso = dtUltAcesso;
     }
 

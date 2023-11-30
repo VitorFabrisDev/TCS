@@ -3,6 +3,7 @@ package com.tcs_senac.ruralfacil.model;
 import com.tcs_senac.ruralfacil.model.Enum.Roles;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -34,14 +35,14 @@ public class AcessoPessoa{
     @Column(
             name = "dtUltAcesso"
     )
-    private Date dtUltAcesso;
+    private LocalDateTime dtUltAcesso;
 
     @Column(
             name = "admin"
     )
     private Roles admin;
 
-    public AcessoPessoa(long id, String login, String password, long qtdAcesso, Date dtUltAcesso, Roles admin) {
+    public AcessoPessoa(long id, String login, String password, long qtdAcesso, LocalDateTime dtUltAcesso, Roles admin) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -94,11 +95,11 @@ public class AcessoPessoa{
         this.qtdAcesso = qtdAcesso;
     }
 
-    public Date getDtUltAcesso() {
+    public LocalDateTime getDtUltAcesso() {
         return dtUltAcesso;
     }
 
-    public void setDtUltAcesso(Date dtUltAcesso) {
+    public void setDtUltAcesso(LocalDateTime dtUltAcesso) {
         this.dtUltAcesso = dtUltAcesso;
     }
 
