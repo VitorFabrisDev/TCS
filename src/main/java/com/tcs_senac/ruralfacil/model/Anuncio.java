@@ -30,7 +30,7 @@ public class Anuncio {
     @Column(name = "categoria")
     private Categoria categoria;
     @Column(
-            name = "descricao"
+            name = "descricao", length = 1200
     )
     private String descricao;
 
@@ -51,26 +51,26 @@ public class Anuncio {
     private boolean organico;
 
     @Column(
-            name = "foto1"
+            name = "foto1", length = 255
     )
     private String foto1;
 
     @Column(
-            name = "foto2"
+            name = "foto2", length = 255
     )
     private String foto2;
 
     @Column(
-            name = "foto3"
+            name = "foto3", length = 255
     )
     private String foto3;
 
     @Column(
-            name = "foto4"
+            name = "foto4", length = 255
     )
     private String foto4;
     @Column(
-            name = "foto5"
+            name = "foto5", length = 255
     )
     private String foto5;
 

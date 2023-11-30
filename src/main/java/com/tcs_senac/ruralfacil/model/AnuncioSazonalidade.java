@@ -20,7 +20,7 @@ public class AnuncioSazonalidade extends EntityId {
     private Sazonalidade sazonalidade;
 
     public AnuncioSazonalidade() {
-        // Construtor padrão
+
     }
 
     public AnuncioSazonalidade(Anuncio anuncio, Sazonalidade sazonalidade) {

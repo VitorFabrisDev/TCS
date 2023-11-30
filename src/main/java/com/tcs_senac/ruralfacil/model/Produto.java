@@ -17,7 +17,7 @@ public class Produto{
 
 
     @Column(
-            name = "nomeProduto"
+            name = "nomeProduto", length = 255
     )
     private String nomeProduto;
 

@@ -15,12 +15,12 @@ public class Agricultor extends Pessoa{
 
 
     @Column(
-            name = "inscricaoEstadual"
+            name = "inscricaoEstadual", length = 14
     )
     private String inscricaoEstadual;
 
     @Column(
-            name = "caf"
+            name = "caf", length = 36
     )
     private String caf;
 

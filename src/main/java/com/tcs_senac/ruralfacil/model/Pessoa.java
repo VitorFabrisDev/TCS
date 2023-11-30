@@ -15,13 +15,13 @@ public abstract class Pessoa {
     @JoinColumn(name = "idEndereco")
     private Endereco endereco;
     @Column(
-            name = "cpf"
+            name = "cpf", length = 11
     )
     private String cpf;
 
 
     @Column(
-            name = "nome"
+            name = "nome", length = 100
     )
     private String nome;
     @Column(

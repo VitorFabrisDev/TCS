@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 
 public class AgricultorDto {
 
+    private long id;
     private AcessoPessoa acessoPessoa;
     private Endereco endereco;
     private String cpf;
@@ -23,6 +24,22 @@ public class AgricultorDto {
     private String caf;
     private boolean organico;
     private boolean ativo;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isOrganico() {
+        return organico;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
 
     public AcessoPessoa getAcessoPessoa() {
         return acessoPessoa;

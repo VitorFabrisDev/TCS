@@ -17,13 +17,15 @@ public class AcessoPessoa{
     )
     private long id;
 
+
     @Column(
-            name = "login"
+            name = "login", length = 50
+
     )
     private String login;
 
     @Column(
-            name = "password"
+            name = "password" , length = 100
     )
     private String password;
 

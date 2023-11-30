@@ -11,37 +11,37 @@ public class Endereco{
     private long id;
 
     @Column(
-            name = "logradouro"
+            name = "logradouro", length = 255
     )
     private String logradouro;
 
     @Column(
-            name = "numero"
+            name = "numero", length = 10
     )
     private String numero;
 
     @Column(
-            name = "complemento"
+            name = "complemento", length = 255
     )
     private String complemento;
 
     @Column(
-            name = "bairro"
+            name = "bairro", length = 60
     )
     private String bairro;
 
     @Column(
-            name = "municipio"
+            name = "municipio", length = 60
     )
     private String municipio;
 
     @Column(
-            name = "cep"
+            name = "cep", length = 9
     )
     private String cep;
 
     @Column(
-            name = "inscricaoIncra"
+            name = "inscricaoIncra", length = 20
     )
     private String inscricaoIncra;
 
