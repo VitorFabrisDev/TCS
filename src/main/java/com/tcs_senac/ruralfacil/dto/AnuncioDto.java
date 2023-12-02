@@ -162,6 +162,7 @@ public class AnuncioDto {
         dto.setValor(anuncio.getValor());
         dto.setClassificacao(anuncio.getClassificacao());
         dto.setOrganico(anuncio.getOrganico());
+        dto.setSazonalidades(dto.getSazonalidades());
         dto.setFoto1(anuncio.getFoto1());
         dto.setFoto2(anuncio.getFoto2());
         dto.setFoto3(anuncio.getFoto3());
@@ -188,6 +189,7 @@ public class AnuncioDto {
         return anuncio;
     }
 
+
     public static List<AnuncioDto> fromEntity(List<Anuncio> anuncios) {
         return anuncios.stream().map(AnuncioDto::fromEntity).collect(Collectors.toList());
     }
@@ -204,6 +206,15 @@ public class AnuncioDto {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
+    }
+
+    private List<String> convertAnuncioSazonalidadesToStrings() {
+        if (sazonalidades != null) {
+            return sazonalidades.stream()
+                    .map(anuncioSazonalidade -> sazonalidades.toString()) // ou anuncioSazonalidade.toString(), dependendo da implementação de AnuncioSazonalidade
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
 }
