@@ -127,6 +127,7 @@ public class AgricultorDto {
 
     public static AgricultorDto fromEntity(Agricultor agricultor) {
         AgricultorDto dto = new AgricultorDto();
+        dto.setId(agricultor.getId());
         dto.setCpf(agricultor.getCpf());
         dto.setNome(agricultor.getNome());
         dto.setDataNascimento(agricultor.getDataNascimento());
@@ -142,6 +143,7 @@ public class AgricultorDto {
 
     public Agricultor toEntity() {
         Agricultor agricultor = new Agricultor(this.getAcessoPessoa(), this.getEndereco(),this.getCpf(), this.getNome(), this.getDataNascimento(), this.getWhatsApp(), this.getInscricaoEstadual(), this.getCaf(), this.getOrganico(), this.getAtivo());
+        agricultor.setId(this.getId());
         agricultor.setInscricaoEstadual(this.getInscricaoEstadual());
         agricultor.setCaf(this.getCaf());
         agricultor.setOrganico(this.getOrganico());
