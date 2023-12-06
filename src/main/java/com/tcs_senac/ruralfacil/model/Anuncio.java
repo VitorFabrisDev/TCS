@@ -51,26 +51,26 @@ public class Anuncio {
     private boolean organico;
 
     @Column(
-            name = "foto1", length = 255
+            name = "foto1", columnDefinition = "TEXT"
     )
     private String foto1;
 
     @Column(
-            name = "foto2", length = 255
+            name = "foto2", columnDefinition = "TEXT"
     )
     private String foto2;
 
     @Column(
-            name = "foto3", length = 255
+            name = "foto3", columnDefinition = "TEXT"
     )
     private String foto3;
 
     @Column(
-            name = "foto4", length = 255
+            name = "foto4", columnDefinition = "TEXT"
     )
     private String foto4;
     @Column(
-            name = "foto5", length = 255
+            name = "foto5", columnDefinition = "TEXT"
     )
     private String foto5;
     @Column(
