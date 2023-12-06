@@ -84,7 +84,7 @@ public class MarketPlaceController {
                 .innerJoin(QProduto.produto).on(QAnuncio.anuncio.produto.eq(QProduto.produto))
                 .innerJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade))
                 .leftJoin(QAnuncioClienteClassificacao.anuncioClienteClassificacao).on(QAnuncio.anuncio.anuncioClienteClassificacoes.any().eq(QAnuncioClienteClassificacao.anuncioClienteClassificacao))
-                .where(Expressions.booleanTemplate("1=1"));
+                .where(QAnuncio.anuncio.ativo.eq(true));
 
 
         if (agricultor == null && categoria == null && sazonalidade == null && produtofilter == null &&
@@ -119,7 +119,7 @@ public class MarketPlaceController {
             }
 
             if (sazonalidade != null) {
-                query.where(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.in(Sazonalidade.valueOf(sazonalidade)));
+                query.where(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(Sazonalidade.valueOf(sazonalidade)));
             }
 
             if (organico != null) {

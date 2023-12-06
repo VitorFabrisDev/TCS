@@ -40,7 +40,7 @@ public class AnuncioDto {
     private boolean ativo;
 
     private List<String> sazonalidades;
-
+//teste
     public Produto getProduto() {
         return produto;
     }

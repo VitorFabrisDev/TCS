@@ -129,7 +129,7 @@ public class Anuncio {
         this.ativo = ativo;
 
     }
-
+//teste
     public Anuncio(){
 
     }
