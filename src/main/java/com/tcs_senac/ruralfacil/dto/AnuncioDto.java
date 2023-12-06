@@ -37,6 +37,7 @@ public class AnuncioDto {
     private String foto3;
     private String foto4;
     private String foto5;
+    private boolean ativo;
 
     private List<String> sazonalidades;
 
@@ -86,6 +87,14 @@ public class AnuncioDto {
 
     public Double getClassificacao() {
         return classificacao;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public void setClassificacao(Double classificacao) {
@@ -168,6 +177,7 @@ public class AnuncioDto {
         dto.setFoto3(anuncio.getFoto3());
         dto.setFoto4(anuncio.getFoto4());
         dto.setFoto5(anuncio.getFoto5());
+        dto.setAtivo(anuncio.isAtivo());
         return dto;
     }
 
@@ -186,6 +196,7 @@ public class AnuncioDto {
         anuncio.setFoto3(this.getFoto3());
         anuncio.setFoto4(this.getFoto4());
         anuncio.setFoto5(this.getFoto5());
+        anuncio.setAtivo(this.isAtivo());
         return anuncio;
     }
 

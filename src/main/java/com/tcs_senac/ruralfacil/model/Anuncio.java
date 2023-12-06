@@ -73,6 +73,10 @@ public class Anuncio {
             name = "foto5", length = 255
     )
     private String foto5;
+    @Column(
+            name = "ativo"
+    )
+    private boolean ativo;
 
     @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnuncioSazonalidade> anunciosazonalidade;
@@ -108,7 +112,7 @@ public class Anuncio {
         this.id = id;
     }
 
-    public Anuncio(Agricultor agricultor,Produto produto,Categoria categoria, String descricao, Double valor, Double classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade) {
+    public Anuncio(Agricultor agricultor,Produto produto,Categoria categoria, String descricao, Double valor, Double classificacao, boolean organico, String foto1, String foto2, String foto3, String foto4, String foto5,List<AnuncioSazonalidade> anunciosazonalidade, boolean ativo) {
         this.agricultor = agricultor;
         this.produto = produto;
         this.categoria = categoria;
@@ -122,6 +126,7 @@ public class Anuncio {
         this.foto4 = foto4;
         this.foto5 = foto5;
         this.anunciosazonalidade = anunciosazonalidade;
+        this.ativo = ativo;
 
     }
 
@@ -129,6 +134,13 @@ public class Anuncio {
 
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 
     public Agricultor getAgricultor() {
         return agricultor;
