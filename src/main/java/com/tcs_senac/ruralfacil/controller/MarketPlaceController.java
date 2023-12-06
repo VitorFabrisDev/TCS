@@ -99,11 +99,11 @@ public class MarketPlaceController {
             NumberPath<Double> clasAnuncio = QAnuncio.anuncio.classificacao;
 
             query.orderBy(
-                    sazonalidadePath.when(Sazonalidade.valueOf(mesAtual)).then(0).otherwise(1).desc(),
+                    sazonalidadePath.when(Sazonalidade.valueOf(mesAtual)).then(0).otherwise(1).asc(),
                     classificacaoPath.when(5.0).then(0)
                             .when(4.0).then(1)
                             .when(3.0).then(2)
-                            .otherwise(3).desc(),
+                            .otherwise(3).asc(),
                     qtdInteracaoPath.desc(),
                     qtdAcessoPath.desc(),
                     clasAnuncio.desc()

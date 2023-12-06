@@ -74,7 +74,7 @@ public class AnuncioAgricultorController {
                 .from(QAnuncio.anuncio)
                 .innerJoin(QAgricultor.agricultor).on(QAnuncio.anuncio.agricultor.eq(QAgricultor.agricultor))
                 .innerJoin(QProduto.produto).on(QAnuncio.anuncio.produto.eq(QProduto.produto))
-                .innerJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade))
+                .leftJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade))
                 .leftJoin(QAnuncioClienteClassificacao.anuncioClienteClassificacao).on(QAnuncio.anuncio.anuncioClienteClassificacoes.any().eq(QAnuncioClienteClassificacao.anuncioClienteClassificacao))
                 .where(Expressions.booleanTemplate("1=1"));
 
