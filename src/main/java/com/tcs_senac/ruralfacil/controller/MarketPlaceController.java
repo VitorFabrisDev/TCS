@@ -84,7 +84,8 @@ public class MarketPlaceController {
                 .innerJoin(QProduto.produto).on(QAnuncio.anuncio.produto.eq(QProduto.produto))
                 .innerJoin(QAnuncioSazonalidade.anuncioSazonalidade).on(QAnuncio.anuncio.anunciosazonalidade.any().sazonalidade.eq(QAnuncioSazonalidade.anuncioSazonalidade.sazonalidade))
                 .leftJoin(QAnuncioClienteClassificacao.anuncioClienteClassificacao).on(QAnuncio.anuncio.anuncioClienteClassificacoes.any().eq(QAnuncioClienteClassificacao.anuncioClienteClassificacao))
-                .where(QAnuncio.anuncio.ativo.eq(true));
+                .where(QAnuncio.anuncio.ativo.eq(true))
+                .where(QAgricultor.agricultor.ativo.eq(true));
 
 
         if (agricultor == null && categoria == null && sazonalidade == null && produtofilter == null &&
@@ -111,7 +112,7 @@ public class MarketPlaceController {
 
         } else {
             if (agricultor != null) {
-                query.where(QAnuncio.anuncio.agricultor.nome.contains(agricultor));
+                query.where(QAnuncio.anuncio.agricultor.nome.lower().contains(agricultor.toUpperCase()));
             }
 
             if (categoria != null) {
@@ -128,7 +129,7 @@ public class MarketPlaceController {
             }
 
             if (produtofilter != null) {
-                query.where(QAnuncio.anuncio.produto.nomeProduto.contains(produtofilter));
+                query.where(QAnuncio.anuncio.produto.nomeProduto.lower().contains(produtofilter.toUpperCase()));
             }
 
             if (produto != null) {
